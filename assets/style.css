@@ -8,8 +8,6 @@
 body {
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-flow: wrap;
     /* I am using vw and vh here because it makes the page adhere to what the viewable pixels are on the screen. Then we will touch this up with @media screen. */
     width: 100vw;
     height: 100vh;
@@ -33,18 +31,38 @@ header {
 
 /* This is where the quiz will bordered into. */
 main {
+    display: flex;
+    flex-flow: column wrap;
     justify-content: center;
-    align-items: center;
-    width: 80vw;
+    align-items: flex-start;
+    width: 80%;
     height: 90vh;
+}
+
+section .startScreen {
+    justify-content: center;
+    align-items: flex-start;
+}
+/* Adjusted width so the buttons don't run the length of the main tag. */
+#questionContainer{
+    width: 75%;
 }
 
 /* This will apply to all the buttons on the page. */
 button {
-    flex-flow: column;
     padding: 5px;
     background: purple;
     border: 2px solid black;
     border-radius: 10px;
     color: white;
 }
+
+.answerBtn {
+    flex-flow: column wrap;
+    width: 100%;
+    margin: 0 0 20px 0;
+}
+
+/* .hide {
+    display: none;
+} */
