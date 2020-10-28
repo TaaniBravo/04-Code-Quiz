@@ -11,15 +11,13 @@ body {
     /* I am using vw and vh here because it makes the page adhere to what the viewable pixels are on the screen. Then we will touch this up with @media screen. */
     width: 100vw;
     height: 100vh;
-    justify-content: center;
-    align-items: center;
 }
 
 header {
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
-    margin-top: 5px 0 20px;
+    margin-top: 10px;
     padding: 0;
     height: 10vh;
 }
@@ -32,20 +30,60 @@ header {
 /* This is where the quiz will bordered into. */
 main {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column;
     justify-content: center;
-    align-items: flex-start;
-    width: 80%;
-    height: 90vh;
+    width: 100vw;
+    height: 60vh;
+    overflow: hidden;
 }
 
-section .startScreen {
+#startScreen h2, 
+#startScreen p, 
+#startScreen ul {
+    display: flex;
+    margin: 5px;
+    padding: 0;
     justify-content: center;
-    align-items: flex-start;
+    flex-flow: column wrap;
+    width: 100%;
+    text-align: center;
+} 
+
+#startScreen h2 {
+    font-family: cursive;
+    margin-bottom: 20px;
+    color: purple;
+    font-size: 2em;
 }
-/* Adjusted width so the buttons don't run the length of the main tag. */
+
+#startScreen h3 {
+    text-align: center;
+    margin: 5px;
+    text-decoration: underline;
+}
+
+#startScreen ul {
+    list-style-type: none;
+}
+
+/* The Start button needed to be in its own div so I could center it properly and then I needed to give it its own display and justify-content values for it to work. It would not when trying to group it with the other .startScreen tags. */
+#buttonBlock {
+    display: flex;
+    justify-content: center;
+}
+
+.startBtn {
+    font-size: 1.5em;
+    padding: 5px;
+    width: 25%;
+}
+
 #questionContainer{
-    width: 75%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
 }
 
 /* This will apply to all the buttons on the page. */
@@ -53,16 +91,27 @@ button {
     padding: 5px;
     background: purple;
     border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
+    cursor: pointer;
 }
 
 .answerBtn {
     flex-flow: column wrap;
-    width: 100%;
+    width: 50%;
     margin: 0 0 20px 0;
 }
 
-/* .hide {
-    display: none;
-} */
+#gameOverScreen {
+    display: flex;
+    justify-content: center;
+}
+
+.submit {
+    margin: 5px;
+}
+
+.hide {
+    /* This will allow the javascript to dictate which of the sections are viewable at the moment. */
+    display: none !important;
+}

@@ -3,37 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Quiz!</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <title>Coding Quiz!</title>
+    <link rel='stylesheet' href='assets/style.css'>
 </head>
 <body>
     <header>
         <div>View Highscores</div>
-        <div id="timer">Time left/Score: <span id="timeLeft"></span></div>
+        <div id='timer'>Time left/Score: <span id='timeLeft'></span></div>
     </header>
 
-    <main class="container">
-        <section class='startScreen'>
-            <h2></h2>
-            <p></p>
-            <button class="startBtn">Start</button>
+    <main class='container'>
+        <section id='startScreen' class='show'>
+            <h2>Welcome to Taani's Coding Quiz!</h2>
+            <p>Test your knowledge and coding know how with this interactive quiz.</p>
+            <ul><h3>Rules</h3>
+                <li>Score is tied to the time left. The faster you finish the better.</li>
+                <li>But be careful, a wrong answer will make you lose time off the clock.</li>
+                <li>Try not to google anything.</li>
+                <li>Good luck!</li>
+            </ul>
+            <div id='buttonBlock'>
+                <button class='startBtn'>Start</button>
+            </div>
         </section>
-        <section id="questionContainer" class="hide">
+        <section id='questionContainer' class='hide'>
 
-            <h2 id="question">Question</h2>
+            <h2 id='question'>Question</h2>
 
-            <button class='answerBtn' id="answer1">1</button>
-            <button class='answerBtn' id="answer2">2</button>
-            <button class='answerBtn' id='answer3'>3</button>
-            <button class='answerBtn' id="answer4">4</button>
+            <div id='buttonBlock'>
+                <button class='answerBtn' id='answer1'>A. </button>
+            </div>
+            <div id='buttonBlock'>
+                <button class='answerBtn' id='answer2'>B. </button>
+            </div>
+            <div id='buttonBlock'>
+                <button class='answerBtn' id='answer3'>C. </button>
+            </div>
+            <div id='buttonBlock'>
+                <button class='answerBtn' id='answer4'>D. </button>
+            </div>
             
         </section>
         <section id='gameOverScreen' class='hide'>
-            <input type="text" id="userInitials" placeholder="Put Initials Here (eg. TM)">
-            <button class="Submit">Submit Score</button>
+            <input type='text' id='userInitials' placeholder='Put Initials Here (eg. TM)'>
+            <button class='submit'>Submit Score</button>
         </section>
     </main>
     
-    <script src="assets/script.js"></script>
+    <script src='assets/script.js'></script>
 </body>
 </html>
