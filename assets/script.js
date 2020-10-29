@@ -1,5 +1,5 @@
 // DECLARE our variables
-let startBtnEL = document.getElementsByClassName('startBtn');
+let startBtnEL = document.getElementById('startBtn');
 let answerBtnEL = document.getElementsByClassName('answerBtn');
 let questionEL = document.getElementsByClassName('question');
 let gameOverEL = document.getElementsByClassName('gameOverScreen')
@@ -40,6 +40,14 @@ function submitScore() {
 
 };
 
+startBtnEL.addEventListener('click', () => {
+    console.log('1111')
+})
+
+// answerBtnEL.addEventListener('click', () => {
+//     console.log('1111')
+// })
+    
 
 
 

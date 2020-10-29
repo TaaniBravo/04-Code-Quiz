@@ -72,7 +72,7 @@ main {
     justify-content: center;
 }
 
-.startBtn {
+#startBtn {
     font-size: 1.5em;
     padding: 5px;
     width: 25%;
