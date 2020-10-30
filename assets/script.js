@@ -6,10 +6,10 @@ let startScreenEl = document.getElementById('startScreen');
 // Question Screen Variables
 let questionEl = document.getElementById('question');
 let questionContainerEl = document.getElementById('questionContainer');
-let answerBtnAEl = document.getElementById('answerBtnA');
-let answerBtnBEl = document.getElementById('answerBtnB');
-let answerBtnCEl = document.getElementById('answerBtnC');
-let answerBtnDEl = document.getElementById('answerBtnD');
+let answerBtnEl = document.getElementById('answerBtn');
+// let answerBtnBEl = document.getElementById('answerBtnB');
+// let answerBtnCEl = document.getElementById('answerBtnC');
+// let answerBtnDEl = document.getElementById('answerBtnD');
 let randomQuestion, questionIndex
 
 // Game Over Screen Variables
@@ -22,12 +22,11 @@ let userIdEL = document.getElementById('#userInitials');
 let timeLeft = 75;
 let timerDisplayEL = document.getElementById('timer');
 
+
+
 // addEventListeners
 startBtnEl.addEventListener('click', startQuiz)
-answerBtnAEl.addEventListener('click', nextQuestion)
-answerBtnBEl.addEventListener('click', nextQuestion)
-answerBtnCEl.addEventListener('click', nextQuestion)
-answerBtnDEl.addEventListener('click', nextQuestion)
+// answerBtnAEl.addEventListener('click', quizQuestions.answers.correct[1], nextQuestion)
 
 // Functions
 function timer() {
@@ -58,30 +57,42 @@ function startQuiz() {
     timer();
 
     // WHEN the quiz starts we want the quiz to be in a random array so that it's never the same.
-    questionIndex = 0; {
-    randomQuestion = quizQuestions.sort(() => Math.random() - .5)
+    questionIndex = 0;
+    randomQuestion = quizQuestions.sort(() => Math.random() - .5);
     // WHEN the question screen appears we want the first question to appear on the HTML provided.
     showQuestion();
     console.log(randomQuestion);
-}
 };
 
 function showQuestion() {
 
     // THEN the user is presented with a question. 
-    questionEl.innerText = randomQuestion[questionIndex].question
-    answerBtnAEl.innerText = 'A. ' + randomQuestion[questionIndex].answers[0].text
-    answerBtnBEl.innerText = 'B. ' + randomQuestion[questionIndex].answers[1].text
-    answerBtnCEl.innerText = 'C. ' + randomQuestion[questionIndex].answers[2].text
-    answerBtnDEl.innerText = 'D. ' + randomQuestion[questionIndex].answers[3].text
+    questionEl.innerText = randomQuestion[questionIndex].question;
+    answerBtnAEl.innerText = 'A. ' + randomQuestion[questionIndex].answers[0].text;
+    answerBtnBEl.innerText = 'B. ' + randomQuestion[questionIndex].answers[1].text;
+    answerBtnCEl.innerText = 'C. ' + randomQuestion[questionIndex].answers[2].text;
+    answerBtnDEl.innerText = 'D. ' + randomQuestion[questionIndex].answers[3].text;
 
+    answerBtnAEl.addEventListener('click', nextQuestion)
+    answerBtnBEl.addEventListener('click', nextQuestion)
+    answerBtnCEl.addEventListener('click', nextQuestion)
+    answerBtnDEl.addEventListener('click', nextQuestion)
+
+};
+
+function nextQuestion() {
     // IF the user answers a question correctly then they are presented with another question and the user is rewarded a point.
-    if (answers.correct[true]) {
-        
+    if (quizQuestions.answers.correct: true) {
+        questionIndex++;
+        questionEl.innerText = randomQuestion[questionIndex].question;
+    answerBtnAEl.innerText = 'A. ' + randomQuestion[questionIndex].answers[0].text;
+    answerBtnBEl.innerText = 'B. ' + randomQuestion[questionIndex].answers[1].text;
+    answerBtnCEl.innerText = 'C. ' + randomQuestion[questionIndex].answers[2].text;
+    answerBtnDEl.innerText = 'D. ' + randomQuestion[questionIndex].answers[3].text;
+
     }
 
     // IF NOT then we don't want the page to change the question, but notify them in a textbox below that they are wrong and 5 seconds are removed off of the timer.
-
 };
 
 function wrongAnswer(timer) {
@@ -97,104 +108,86 @@ function submitScore() {
 let quizQuestions = [
     {
         question: 'Who do you play in the main games?',
-        answers: [
-            {text: 'Zelda', correct: false},
-            {text: 'Tingle', correct: false},
-            {text: 'Skull Kid', correct: false},
-            {text: 'Link', correct: true}
-        ]
+        buttonA: 'Zelda',
+        buttonB: 'Tingle',
+        buttonC: 'Skull Kid',
+        buttonD: 'Link',
+        answer: 'Link',
     },
     {
         question: 'What is the TriForce?',
-        answers: [
-            {text: 'The power of the Golden Goddesses', correct: true},
-            {text: 'Tattoo for members of the Yiga Clan', correct: false},
-            {text: 'The instrument Link plays music with', correct: false},
-            {text: 'A powerful finishing move', correct: false}
-        ]
+        buttonA: 'The power of the Golden Goddesses',
+        buttonB: 'Tattoo for members of the Yiga Clan',
+        buttonC: 'The instrument Link plays music with',
+        buttonD: 'A powerful finishing move',
+        answer: 'The power of the Golden Goddesses',
     },
     {
         question: 'Who is the usual main antagonist?',
-        answers: [
-            {text: 'Zant', correct: false},
-            {text: 'King of Red Lions', correct: false},
-            {text: 'Majora', correct: false},
-            {text: 'Ganon', correct: true}
-        ]
+        buttonA: 'Zant',
+        buttonB: 'King of Red Lions',
+        buttonC: 'Majora',
+        buttonD: 'Ganon',
+        answer: 'Ganon',
     },
     {
         question: 'What does each piece of the TriForce stand for?',
-        answers: [
-            {text: 'Cool, Calm, and Collected', correct: false},
-            {text: 'Water, Fire, and Grass', correct: false},
-            {text: 'Power, Wisdom, and Courage', correct: true},
-            {text: 'Love, Peace, and Tranquility', correct: false}
-        ]
+        buttonA: 'Cool, Calm, and Collected',
+        buttonB: 'Water, Fire, and Grass',
+        buttonC: 'Power, Wisdom, and Courage', correct: true,
+        buttonD: 'Love, Peace, and Tranquility',
+        answer: 'Power, Wisdom, and Courage',
     },
     {
         question: 'Who created the Legend of Zelda?',
-        answers: [
-            {text: 'Shigeru Miyamoto', correct: true},
-            {text: 'Takashi Tezuke', correct: true},
-            {text: 'Shigeki Morimoto', correct: false},
-            {text: 'Koji Okada', correct: false}
-        ]
+        buttonA: 'Shigeru Miyamoto',
+        buttonB: 'Takashi Tezuke',
+        buttonC: 'Shigeki Morimoto',
+        buttonD: 'Koji Okada',
+        answers: 'Shigeru Miyamoto', 'Takashi Tezuke'
     },
     {
         question: 'What is Zelda\'s alter ego in Ocarina of Time?',
-        answers: [
-            {text: 'Impa', correct: false},
-            {text: 'Sheik', correct: true},
-            {text: 'Tetra', correct: false},
-            {text: 'Saria', correct: false}
-        ]
+        buttonA: 'Impa',
+        buttonB: 'Sheik',
+        buttonC: 'Tetra',
+        buttonD: 'Saria',
+        answer: 'Sheik',
     },
     {
         question: 'When was the first Legend of Zelda originally released?',
-        answers: [
-            {text: '1986', correct: true},
-            {text: '1982', correct: false},
-            {text: '1985', correct: false},
-            {text: '1990', correct: false}
-        ]
+        buttonA: '1986',
+        buttonB: '1982',
+        buttonC: '1985',
+        buttonD: '1990',
+        answer: '1986',
     },
     {
         question: 'Which of the games is set in the span of 3 days?',
-        answers: [
-            {text: 'Wind Waker', correct: false},
-            {text: 'Link\s Awakening', correct: false},
-            {text: 'Majora\'s Mask', correct: true},
-            {text: 'Minish Cap', correct: false}
-        ]
+        buttonA: 'Wind Waker',
+        buttonB: 'Link\s Awakening',
+        buttonC: 'Majora\'s Mask',
+        buttonD: 'Minish Cap',
+        answer: 'Majora\'s Mask',
     },
     {
         question: 'Which of the games main plot involves time travel?',
-        answers: [
-            {text: 'Skyward Sword', correct: false},
-            {text: 'Twilight Princess', correct: false},
-            {text: 'The Adventure of Link', correct: false},
-            {text: 'Ocarina of Time', correct: true}
-        ]
+        buttonA: 'Skyward Sword',
+        button: 'Twilight Princess',
+        button: 'The Adventure of Link',
+        button: 'Ocarina of Time',
+        answer:'Ocarina of Time',
     },
     {
         question: 'What is the best selling Legend of Zelda game?',
-        answers: [
-            {text: 'Ocarina of Time', correct: false},
-            {text: 'Legend of Zelda (the Original)', correct: false},
-            {text: 'Breath of the Wild', correct: true},
-            {text: 'Phantom Hourglass', correct: false}
+        buttonA: 'Ocarina of Time',
+        buttonB: 'Legend of Zelda (the Original)',
+        buttonC: 'Breath of the Wild',
+        buttonD: 'Phantom Hourglass',
+        answer: 'Breath of the Wild',
         ]
     }
 ];
-
-
-
-
-
-
-
-
-
 
 // WHEN all questions are answered or the timer reaches 0 then the game is over. 
 
