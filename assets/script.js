@@ -1,22 +1,34 @@
 // DECLARE our variables
+// Start Screen Variables
 let startBtnEL = document.getElementById('startBtn');
-let answerBtnEL = document.getElementsByClassName('answerBtn');
+let startScreenEL = document.getElementById('startScreen');
+
+// Question Screen Variables
 let questionEL = document.getElementsByClassName('question');
-let gameOverEL = document.getElementsByClassName('gameOverScreen')
-let submitBtnEL = document.getElementsByClassName('submit')
-let userIdEL = document.getElementById('#userInitials')
+let questionContainerEL = document.getElementById('questionContainer');
+let answerBtnEL = document.getElementsByClassName('answerBtn');
+
+// Game Over Screen Variables
+let gameOverEL = document.getElementsByClassName('gameOverScreen');
+let submitBtnEL = document.getElementsByClassName('submit');
+let userIdEL = document.getElementById('#userInitials');
+
+// Quiz Question Index
 let quizQuestions = {
 
 };
-let timer = 0;
-let score = timer;
+
+// Timer/Score
+let time = 0;
+let timerEL = document.getElementById('timeLeft');
+let timer = setInterval(function() {
+    countdown
+});
 
 function startQuiz() {
 // WHEN the user clicks the START BUTTON we want the timer in the top-left corner to start counting down from 60.
-
-};
-
-function timeLeft() {
+    startScreenEL.classList.add('hide');
+    questionContainerEL.classList.remove('hide')
 
 };
 
@@ -40,9 +52,7 @@ function submitScore() {
 
 };
 
-startBtnEL.addEventListener('click', () => {
-    console.log('1111')
-})
+startBtnEL.addEventListener('click', startQuiz)
 
 // answerBtnEL.addEventListener('click', () => {
 //     console.log('1111')
