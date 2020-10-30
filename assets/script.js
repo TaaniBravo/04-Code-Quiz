@@ -16,7 +16,7 @@ let retakeBtnEL = document.getElementById('retakeBtn');
 let userIdEL = document.getElementById('#userInitials');
 
 // Timer/Score Variables
-let timeLeft = 5;
+let timeLeft = 75;
 let timerDisplayEL = document.getElementById('timer');
 
 // addEventListeners
@@ -51,32 +51,23 @@ function startQuiz() {
     // WHEN the user clicks the START BUTTON we want the timer in the top-left corner to start counting down from 60.
     timer();
 
+    // WHEN the quiz starts we want the quiz to be in a random array so that it's never the same.
+    questionIndex = 0;
+    randomQuestion = quizQuestions.sort(() => Math.random() - .5)
     // WHEN the question screen appears we want the first question to appear on the HTML provided.
-    for (questionIndex = 0; questionIndex < quizQuestions.length; questionIndex++) {
-    randomQuestion = quizQuestions[Math.floor(Math.random * quizQuestions.length)]
-    }
-    nextQuestion();
-    console.log(nextQuestion());
+    showQuestion();
+    console.log(randomQuestion);
 };
 
-function showQuestion(quizQuestions) {
+function showQuestion() {
     // THEN the user is presented with a question. 
-    questionEL.innerHTML = quizQuestions[0].value
+    questionEL.textContent = randomQuestion[questionIndex]
     // IF the user answers a question correctly then they are presented with another question and the user is rewarded a point.
 
     // IF NOT then we don't want the page to change the question, but notify them in a textbox below that they are wrong and 5 seconds are removed off of the timer.
 
 
 };
-
-function nextQuestion() {
-    showQuestion(randomQuestion[questionIndex])
-}
-
-// function gameOverScreen() {
-// // WHEN the page opens up the site starts with a title and a start button.
-
-// };
 
 function submitScore() {
 // WHEN the game is over then the user can save their name and score and it updates to the leaderboard.
