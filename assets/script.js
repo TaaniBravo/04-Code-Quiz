@@ -13,15 +13,14 @@ let gameOverEL = document.getElementById('gameOverScreen');
 let submitBtnEL = document.getElementsByClassName('submit');
 let userIdEL = document.getElementById('#userInitials');
 
-// Quiz Question Index
-let quizQuestions = {
-
-};
-
-// Timer/Score
+// Timer/Score Variables
 let timeLeft = 5;
 let timerDisplayEL = document.getElementById('timer');
 
+// addEventListeners
+startBtnEL.addEventListener('click', startQuiz)
+
+// Functions
 function timer() {
     setInterval(function() {
 
@@ -46,6 +45,8 @@ function startQuiz() {
     startScreenEL.classList.add('hide');
     questionContainerEL.classList.remove('hide')
     timer();
+    
+    nextQuestion()
 };
 
 function nextQuestion() {
@@ -72,13 +73,33 @@ function wrongAnswer(timer) {
 
 };
 
-startBtnEL.addEventListener('click', startQuiz)
+
 
 // answerBtnEL.addEventListener('click', () => {
 //     console.log('1111')
 // })
     
-
+// Quiz Question Index
+let quizQuestions = [
+    {
+        question: 'Who do you play in the main games?',
+        answers: [
+            {text: 'Zelda', correct: 'false'},
+            {text: 'Tingle', correct: 'false'},
+            {text: 'Skull Kid', correct: 'false'},
+            {text: 'Link', correct: 'true'}
+        ]
+    },
+    {
+        question: 'What is the TriForce?',
+        answers: [
+            {text: 'The power of the Golden Goddesses', correct: 'true'},
+            {text: 'Tattoo for members of the Yiga Clan', correct: 'false'},
+            {text: 'The instrument Link plays music with', correct: 'false'},
+            {text: 'A powerful finishing move', correct: 'false'}
+        ]
+    }
+];
 
 
 

@@ -1,74 +1,49 @@
 # Q&A Cheat Sheet
 
-## Questions 1-5: Understanding the language!
+## Questions
 ```
-1. What is JavaScript?
+1. Who do you play in the main games?
 
-2. What is an object?
+2. What is the TriForce?
 
-3. What do strings do?
+3. Who is the main antagonist?
 
-4. What is a boolean?
+4. What does each piece of the TriForce stand for?
 
-5. What is a function?
+5. Who created the Legend of Zelda?
+
+6. What is Zelda's alter ego in Ocarina of Time?
+
+7. When was Legend of Zelda originally released?
+
+8. Which of the games is set in the span of 3 days?
+
+9. Which of the games is set between time travel?
+
+10. What is the best selling Legend of Zelda game?
+
 ```
-## Questions 6-10: Finish the function!
+
+## Answers
 ```
-1. 
+1. Link
 
-2.
+2. The essences of the Golden Goddesses
 
-3.
+3. Ganon
 
-4.
+4. Power, Wisdom, and Courage
 
-5.
-```
-## Questions 11-15: Bonus!
-```
-1. 
+5. Shigeru Miyamoto and Takashi Tezuka (Both answers work)
 
-2.
+6. Sheik
 
-3.
+7. 1986
 
-4.
+8. Majora's Mask
 
-5.
-```
-## Answers 1-5: Understanding the language!
-```
-1. A programming language that helps build interactive web pages.
+9. Ocarina of Time
 
-2. A variable that can contain many properties and values.
-
-3. Hold data that can be represented in text form.
-
-4. An object that represents one of two values: true or false.
-
-5. A "subprogram" composed of sequence statements that will return a value.
-```
-## Answers 6-10: Finish the function!
-```
-1. 
-
-2.
-
-3.
-
-4.
-
-5.
-```
-## Answers 11-15: Bonus!
-```
-1. 
-
-2.
-
-3.
-
-4.
-
-5.
+10. Breath of the Wild
+ 
 ```
