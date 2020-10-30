@@ -31,16 +31,16 @@
             <h2 id='question'>Question</h2>
 
             <div id='buttonBlock'>
-                <button id='answerBtn' data-attr='A'>A. </button>
+                <button id='answerBtn' data-btn='1'>A. </button>
             </div>
             <div id='buttonBlock'>
-                <button id='answerBtn' data-attr='A'>B. </button>
+                <button id='answerBtn' data-btn='2'>B. </button>
             </div>
             <div id='buttonBlock'>
-                <button id='answerBtn' data-attr='A'>C. </button>
+                <button id='answerBtn' data-btn='3'>C. </button>
             </div>
             <div id='buttonBlock'>
-                <button id='answerBtn' data-attr='A'>D. </button>
+                <button id='answerBtn' data-btn='4'>D. </button>
             </div>
             
         </section>
@@ -48,6 +48,10 @@
             <input type='text' id='userInitials' placeholder='Put Initials Here (eg. TM)'>
             <button class='submitScreen' id="submitBtn">Submit Score</button>
             <button class='submitScreen' id="retakeBtn">Retake Quiz</button>
+        </section>
+        <section class='hide correctAndWrong'>
+            <p class='hide' id="correctSign">Correct</p>
+            <p class='hide' id="wrongSign">Wrong</p>
         </section>
     </main>
     

@@ -115,6 +115,14 @@ button {
     margin: 0 0 20px 0;
 }
 
+.correctAndWrong {
+    display: flex;
+    max-width: 50%;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+}
+
 #gameOverScreen {
     display: flex;
     justify-content: center;
