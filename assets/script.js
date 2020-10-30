@@ -6,7 +6,7 @@ let startScreenEL = document.getElementById('startScreen');
 // Question Screen Variables
 let questionEL = document.getElementsByClassName('question');
 let questionContainerEL = document.getElementById('questionContainer');
-let answerBtnEL = document.getElementsByClassName('answerBtn');
+let answerBtnEL = document.getElementById('answerBtn');
 
 // Game Over Screen Variables
 let gameOverEL = document.getElementById('gameOverScreen');
@@ -19,6 +19,7 @@ let timerDisplayEL = document.getElementById('timer');
 
 // addEventListeners
 startBtnEL.addEventListener('click', startQuiz)
+answerBtnEL.addEventListener('click', startQuiz)
 
 // Functions
 function timer() {
@@ -45,7 +46,7 @@ function startQuiz() {
     startScreenEL.classList.add('hide');
     questionContainerEL.classList.remove('hide')
     timer();
-    
+
     nextQuestion()
 };
 
@@ -72,12 +73,6 @@ function submitScore() {
 function wrongAnswer(timer) {
 
 };
-
-
-
-// answerBtnEL.addEventListener('click', () => {
-//     console.log('1111')
-// })
     
 // Quiz Question Index
 let quizQuestions = [

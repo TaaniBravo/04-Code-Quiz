@@ -109,7 +109,7 @@ button {
     cursor: pointer;
 }
 
-.answerBtn {
+#answerBtn {
     flex-flow: column wrap;
     width: 50%;
     margin: 0 0 20px 0;
