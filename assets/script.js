@@ -7,10 +7,12 @@ let startScreenEL = document.getElementById('startScreen');
 let questionEL = document.getElementsByClassName('question');
 let questionContainerEL = document.getElementById('questionContainer');
 let answerBtnEL = document.getElementById('answerBtn');
+let randomQuestion, questionIndex
 
 // Game Over Screen Variables
 let gameOverEL = document.getElementById('gameOverScreen');
-let submitBtnEL = document.getElementsByClassName('submit');
+let submitBtnEL = document.getElementById('submitBtn');
+let retakeBtnEL = document.getElementById('retakeBtn');
 let userIdEL = document.getElementById('#userInitials');
 
 // Timer/Score Variables
@@ -42,23 +44,34 @@ function timer() {
 };
 
 function startQuiz() {
-// WHEN the user clicks the START BUTTON we want the timer in the top-left corner to start counting down from 60.
+    // WHEN the user clicks the START BUTTON we want the start screen to switch with the question screen.
     startScreenEL.classList.add('hide');
     questionContainerEL.classList.remove('hide')
+
+    // WHEN the user clicks the START BUTTON we want the timer in the top-left corner to start counting down from 60.
     timer();
 
-    nextQuestion()
+    // WHEN the question screen appears we want the first question to appear on the HTML provided.
+    for (questionIndex = 0; questionIndex < quizQuestions.length; questionIndex++) {
+    randomQuestion = quizQuestions[Math.floor(Math.random * quizQuestions.length)]
+    }
+    nextQuestion();
+    console.log(nextQuestion());
+};
+
+function showQuestion(quizQuestions) {
+    // THEN the user is presented with a question. 
+    questionEL.innerHTML = quizQuestions[0].value
+    // IF the user answers a question correctly then they are presented with another question and the user is rewarded a point.
+
+    // IF NOT then we don't want the page to change the question, but notify them in a textbox below that they are wrong and 5 seconds are removed off of the timer.
+
+
 };
 
 function nextQuestion() {
-// THEN the user is presented with a question. 
-
-// IF the user answers a question correctly then they are presented with another question and the user is rewarded a point.
-
-// IF NOT then we don't want the page to change the question, but notify them in a textbox below that they are wrong and 5 seconds are removed off of the timer.
-
-
-};
+    showQuestion(randomQuestion[questionIndex])
+}
 
 // function gameOverScreen() {
 // // WHEN the page opens up the site starts with a title and a start button.
@@ -79,19 +92,19 @@ let quizQuestions = [
     {
         question: 'Who do you play in the main games?',
         answers: [
-            {text: 'Zelda', correct: 'false'},
-            {text: 'Tingle', correct: 'false'},
-            {text: 'Skull Kid', correct: 'false'},
-            {text: 'Link', correct: 'true'}
+            {text: 'Zelda', correct: false},
+            {text: 'Tingle', correct: false},
+            {text: 'Skull Kid', correct: false},
+            {text: 'Link', correct: true}
         ]
     },
     {
         question: 'What is the TriForce?',
         answers: [
-            {text: 'The power of the Golden Goddesses', correct: 'true'},
-            {text: 'Tattoo for members of the Yiga Clan', correct: 'false'},
-            {text: 'The instrument Link plays music with', correct: 'false'},
-            {text: 'A powerful finishing move', correct: 'false'}
+            {text: 'The power of the Golden Goddesses', correct: true},
+            {text: 'Tattoo for members of the Yiga Clan', correct: false},
+            {text: 'The instrument Link plays music with', correct: false},
+            {text: 'A powerful finishing move', correct: false}
         ]
     }
 ];
