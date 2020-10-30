@@ -9,7 +9,7 @@ let questionContainerEL = document.getElementById('questionContainer');
 let answerBtnEL = document.getElementsByClassName('answerBtn');
 
 // Game Over Screen Variables
-let gameOverEL = document.getElementsByClassName('gameOverScreen');
+let gameOverEL = document.getElementById('gameOverScreen');
 let submitBtnEL = document.getElementsByClassName('submit');
 let userIdEL = document.getElementById('#userInitials');
 
@@ -19,7 +19,7 @@ let quizQuestions = {
 };
 
 // Timer/Score
-let timeLeft = 75;
+let timeLeft = 5;
 let timerDisplayEL = document.getElementById('timer');
 
 function timer() {
@@ -29,6 +29,10 @@ function timer() {
         if (timeLeft <= 0){
             // Clear the interval so that we don't get weird countdowns.
             clearInterval(timeLeft = 0);
+            // Once the interval is cleared and the timer hits 0 the game is over and user is prompted to the 'gameOverScreen'
+            startScreenEL.classList.add('hide');
+            questionContainerEL.classList.add('hide')
+            gameOverEL.classList.remove('hide')
         };
         // We need to now render the time so that we see it in our display.
         timerDisplayEL.innerHTML = ('Timer/Score: ' + timeLeft)
@@ -54,19 +58,19 @@ function nextQuestion() {
 
 };
 
-function gameOverScreen() {
-// WHEN the page opens up the site starts with a title and a start button.
+// function gameOverScreen() {
+// // WHEN the page opens up the site starts with a title and a start button.
 
-};
+// };
 
 function submitScore() {
 // WHEN the game is over then the user can save their name and score and it updates to the leaderboard.
 
 };
 
-function wrongAnswer() {
+function wrongAnswer(timer) {
 
-}
+};
 
 startBtnEL.addEventListener('click', startQuiz)
 

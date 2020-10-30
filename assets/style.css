@@ -22,6 +22,17 @@ header {
     height: 10vh;
 }
 
+#viewHighscores {
+    margin-left: 20px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#viewHighscores:Hover {
+    color: purple;
+}
+
 /* This will push the timer all the way to the right corner and allow the View Highscores to be on the top left. */
 #timer {
     margin-left: auto;
