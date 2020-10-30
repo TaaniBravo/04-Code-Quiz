@@ -6,7 +6,7 @@
 
 2. What is the TriForce?
 
-3. Who is the main antagonist?
+3. Who is the usual main antagonist?
 
 4. What does each piece of the TriForce stand for?
 
@@ -14,11 +14,11 @@
 
 6. What is Zelda's alter ego in Ocarina of Time?
 
-7. When was Legend of Zelda originally released?
+7. When was the first Legend of Zelda originally released?
 
 8. Which of the games is set in the span of 3 days?
 
-9. Which of the games is set between time travel?
+9. Which of the games main plot involves time travel?
 
 10. What is the best selling Legend of Zelda game?
 
