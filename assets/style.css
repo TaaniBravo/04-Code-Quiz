@@ -25,6 +25,8 @@ header {
 /* This will push the timer all the way to the right corner and allow the View Highscores to be on the top left. */
 #timer {
     margin-left: auto;
+    margin-right: 50px;
+    display: inline-flex;
 }
 
 /* This is where the quiz will bordered into. */

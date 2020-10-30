@@ -19,17 +19,29 @@ let quizQuestions = {
 };
 
 // Timer/Score
-let time = 0;
-let timerEL = document.getElementById('timeLeft');
-let timer = setInterval(function() {
-    countdown
-});
+let timeLeft = 75;
+let timerDisplayEL = document.getElementById('timer');
+
+function timer() {
+    setInterval(function() {
+
+        // IF the timer hit 0 we want the timer to stop.
+        if (timeLeft <= 0){
+            // Clear the interval so that we don't get weird countdowns.
+            clearInterval(timeLeft = 0);
+        };
+        // We need to now render the time so that we see it in our display.
+        timerDisplayEL.innerHTML = ('Timer/Score: ' + timeLeft)
+        // And then set timeLeft to -1 every second.
+        timeLeft -= 1
+    }, 1000)     
+};
 
 function startQuiz() {
 // WHEN the user clicks the START BUTTON we want the timer in the top-left corner to start counting down from 60.
     startScreenEL.classList.add('hide');
     questionContainerEL.classList.remove('hide')
-
+    timer();
 };
 
 function nextQuestion() {
@@ -51,6 +63,10 @@ function submitScore() {
 // WHEN the game is over then the user can save their name and score and it updates to the leaderboard.
 
 };
+
+function wrongAnswer() {
+
+}
 
 startBtnEL.addEventListener('click', startQuiz)
 
