@@ -150,10 +150,10 @@ function handleAnswerClick(correctAnswer) {
 
 function rightAnswer() {
     // increment question index
-    questionIndex+= 1
+    questionIndex++;
 
     // run show question again
-    showQuestion()
+    showQuestion(randomQuestion, questionIndex)
 }
 
 function wrongAnswer() {
