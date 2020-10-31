@@ -63,6 +63,7 @@ function timer() {
 };
 
 function startQuiz() {
+
     // WHEN the user clicks the START BUTTON we want the start screen to switch with the question screen.
     startScreenEl.classList.add('hide');
     questionContainerEl.classList.remove('hide');
@@ -86,76 +87,95 @@ function showNewQuestion(randomQuestion, questionIndex) {
     let currentQuestion = randomQuestion[questionIndex];
     questionEl.innerText = currentQuestion.question
 
-    // The innerText of each btn is set to the currentQuestions answers.
-    // answerBtnAEl.innerText = 'A. ' + currentQuestion.answer1
-    // answerBtnBEl.innerText = 'B. ' + currentQuestion.answer2
-    // answerBtnCEl.innerText = 'C. ' + currentQuestion.answer3
-    // answerBtnDEl.innerText = 'D. ' + currentQuestion.answer4
+    // if (questionIndex >= 10) {
+    //     clearInterval(timeLeft)
+    //     score = timeLeft
+    //     questionContainerEl.classList.remove('hide');
+    //     gameOverEl.classList.remove('hide')
+    // }
 
-    // // The values are also set as we will use this to get the correctAnswer.
-    // answerBtnAEl.value = currentQuestion.answer1
-    // answerBtnBEl.value = currentQuestion.answer2
-    // answerBtnCEl.value = currentQuestion.answer3
-    // answerBtnDEl.value = currentQuestion.answer4
-
+    // AND the answers provided in each button for them that they can choose from.
     answers.forEach(answer => {
+        // PULL from the datasets in our HTML and set them to our new const number.
         const number = answer.dataset['number'];
-        answer.innerText = currentQuestion['answer' + number];
+        // APPEND the innerText to what is provided for the currentQuestions answers.
+        answer.innerText = number + '. ' + currentQuestion['answer' + number];
     })
 
-    let correctAnswer = currentQuestion.correctAnswer
-
-    // console.log(correctAnswer)
-    // console.log(answerBtnAEl.value)
-    // console.log(answerBtnBEl.value)
-    // console.log(answerBtnCEl.value)
-    // console.log(answerBtnDEl.value)
-
-    handleAnswerClick(correctAnswer)
+    currentQuestion.correctAnswer = true
 
 };
 
-function handleAnswerClick(correctAnswer) {
+// FOR EACH answer if the user clicks on a button we want certain actions to happen.
+answers.forEach(answer => {
+    answer.addEventListener('click', event => {
+        // IF the user clicks on the wrong button
+        // if (answer.dataset['number'] != currentQuestion.correctAnswer) {
+        //     // THEN 5 seconds are taken off of the timer.
+        //     timeLeft -= 5
+        //     correctWrongSectionEl.classList.remove('hide')
+        //     wrongEl.classList.remove('hide')
+
+        //     setTimeout(() => {
+        //         correctWrongSectionEl.classList.add('hide')
+        //         wrongEl.classList.add('hide')
+        //     }, 1000);
+        // };
+
+        questionIndex++
+
+        correctWrongSectionEl.classList.remove('hide')
+        correctEl.classList.remove('hide')
+
+        setTimeout(() => {
+            correctWrongSectionEl.classList.add('hide')
+            correctEl.classList.add('hide')
+            showNewQuestion(randomQuestion, questionIndex)
+        }, 1000);
+    })
+})
+
+// function handleAnswerClick(correctAnswer) {
     
-    answerBtnAEl.addEventListener('click', () => {
-        // IF this value is the correct answer then we want the rightAnswer function to activate.
-        if (answerBtnAEl.value == correctAnswer) {
-            rightAnswer();
-        }
-        // ELSE we want the wrongAnswer function to activate and then RETURN the user.
-        else {
-            wrongAnswer();
-            return;
-        };
-    });
-    answerBtnBEl.addEventListener('click', () => {
-        if (answerBtnBEl.value == correctAnswer) {
-            rightAnswer();
-        }
-        else {
-            wrongAnswer();
-            return;
-        };
-    });
-    answerBtnCEl.addEventListener('click', () => {
-        if (answerBtnCEl.value == correctAnswer) {
-            rightAnswer();
-        }
-        else {
-            wrongAnswer()
-            return;
-        };
-    });
-    answerBtnDEl.addEventListener('click', () => {
-        if (answerBtnDEl.value == correctAnswer) {
-            rightAnswer();
-        }
-        else {
-            wrongAnswer()
-            return;
-        };
-    });
-};
+//     answerBtnAEl.addEventListener('click', () => {
+//         // IF this value is the correct answer then we want the rightAnswer function to activate.
+//         if (answerBtnAEl.value == correctAnswer) {
+//             rightAnswer();
+//         }
+//         // ELSE we want the wrongAnswer function to activate and then RETURN the user.
+//         else {
+//             wrongAnswer();
+//             return;
+//         };
+//     });
+//     answerBtnBEl.addEventListener('click', () => {
+//         if (answerBtnBEl.value == correctAnswer) {
+//             rightAnswer();
+//         }
+//         else {
+//             wrongAnswer();
+//             return;
+//         };
+//     });
+//     answerBtnCEl.addEventListener('click', () => {
+//         if (answerBtnCEl.value == correctAnswer) {
+//             rightAnswer();
+//         }
+//         else {
+//             wrongAnswer()
+//             return;
+//         };
+//     });
+//     answerBtnDEl.addEventListener('click', () => {
+//         if (answerBtnDEl.value == correctAnswer) {
+//             rightAnswer();
+//         }
+//         else {
+//             wrongAnswer()
+//             return;
+//         };
+//     });
+// };
 
 function rightAnswer() {
     // increment question index
