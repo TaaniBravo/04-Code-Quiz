@@ -98,8 +98,11 @@ function showQuestion(randomQuestion, questionIndex) {
 
     let correctAnswer = currentQuestion.correctAnswer
 
-    console.log(currentQuestion, randomQuestion, questionIndex)
-    console.log(currentQuestion.correctAnswer)
+    console.log(correctAnswer)
+    console.log(answerBtnAEl.value)
+    console.log(answerBtnBEl.value)
+    console.log(answerBtnCEl.value)
+    console.log(answerBtnDEl.value)
 
     handleAnswerClick(correctAnswer)
 
@@ -110,53 +113,73 @@ function handleAnswerClick(correctAnswer) {
     answerBtnAEl.addEventListener('click', () => {
         // IF this value is the correct answer then we want the rightAnswer function to activate.
         if (answerBtnAEl.value == correctAnswer) {
-            rightAnswer()
+            rightAnswer();
         }
         // ELSE we want the wrongAnswer function to activate and then RETURN the user.
         else {
-            wrongAnswer()
+            wrongAnswer();
             return;
-        }
-    })
+        };
+    });
     answerBtnBEl.addEventListener('click', () => {
         if (answerBtnBEl.value == correctAnswer) {
-            rightAnswer()
+            rightAnswer();
         }
         else {
-            wrongAnswer()
+            wrongAnswer();
             return;
-        }
-    })
+        };
+    });
     answerBtnCEl.addEventListener('click', () => {
         if (answerBtnCEl.value == correctAnswer) {
-            rightAnswer()
+            rightAnswer();
         }
         else {
             wrongAnswer()
             return;
-        }
-    })
+        };
+    });
     answerBtnDEl.addEventListener('click', () => {
         if (answerBtnDEl.value == correctAnswer) {
-            rightAnswer()
+            rightAnswer();
         }
         else {
             wrongAnswer()
             return;
-        }
-    })
-    // if (correctAnswer = )
-}
+        };
+    });
+};
 
 function rightAnswer() {
     // increment question index
     questionIndex++;
 
+    // REMOVE the hide class attached to these elements so the user knows they are wrong.
+    correctWrongSectionEl.classList.remove('hide')
+    correctEl.classList.remove('hide')
+
+    setInterval(() => {
+        // THEN ADD the hide class again so that the elements don't stay on the page after 750ms.
+        correctWrongSectionEl.classList.add('hide')
+        correctEl.classList.add('hide')
+    }, 1000);
+
+    resetValue();
+
     // run show question again
-    showQuestion(randomQuestion, questionIndex)
+    setInterval(showQuestion(randomQuestion, questionIndex), 1000);
 }
 
+function resetValue() {
+    
+    answerBtnAEl.removeAttribute('value');
+    answerBtnBEl.removeAttribute('value');
+    answerBtnCEl.removeAttribute('value');
+    answerBtnDEl.removeAttribute('value');
+};
+
 function wrongAnswer() {
+
     // decrease the amount of time left.
     timeLeft-= 5
 
@@ -168,7 +191,7 @@ function wrongAnswer() {
         // THEN ADD the hide class again so that the elements don't stay on the page after 750ms.
         correctWrongSectionEl.classList.add('hide')
         wrongEl.classList.add('hide')
-    }, 750);
+    }, 1000);
 };
 
 function submitScore() {

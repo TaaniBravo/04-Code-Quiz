@@ -48,6 +48,7 @@ main {
     width: 100vw;
     height: 60vh;
     overflow: hidden;
+    clear: both;
 }
 
 #startScreen h2, 
@@ -117,10 +118,25 @@ button {
 
 #correctAndWrong {
     display: flex;
-    max-width: 50%;
+    max-width: 100%;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+}
+
+#correctSign {
+    background-color: green;
+    color: white;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.6);
+    border-radius: 5px;
+    padding: 20px 40px;
+}
+
+#wrongSign {
+    background-color: red;
+    color: white;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.6);
+    border-radius: 5px;
+    padding: 20px 40px;
 }
 
 #gameOverScreen {
