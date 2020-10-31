@@ -125,7 +125,7 @@ answers.forEach(answer => {
             questionIndex++
             correctWrongSectionEl.classList.add('hide');
             correctEl.classList.add('hide');
-            showNewQuestion();
+            showNewQuestion(randomQuestion, questionIndex);
             return;
         }, 1000);
     }
