@@ -77,7 +77,7 @@ function startQuiz() {
     
 };
 
-function showNewQuestion() {
+function showNewQuestion(randomQuestion, questionIndex) {
 
     if (questionIndex >= randomQuestion.length) {
         clearInterval(timeLeft)
