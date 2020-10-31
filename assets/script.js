@@ -6,10 +6,10 @@ let startScreenEl = document.getElementById('startScreen');
 // Question Screen Variables
 let questionEl = document.getElementById('question');
 let questionContainerEl = document.getElementById('questionContainer');
-let answerBtnEl = document.getElementById('answerBtn');
-// let answerBtnBEl = document.getElementById('answerBtnB');
-// let answerBtnCEl = document.getElementById('answerBtnC');
-// let answerBtnDEl = document.getElementById('answerBtnD');
+let answerBtnAEl = document.getElementById('answer1');
+let answerBtnBEl = document.getElementById('answer2');
+let answerBtnCEl = document.getElementById('answer3');
+let answerBtnDEl = document.getElementById('answer4');
 let randomQuestion, questionIndex
 
 // Game Over Screen Variables
@@ -22,7 +22,7 @@ let userIdEL = document.getElementById('#userInitials');
 let timeLeft = 75;
 let timerDisplayEL = document.getElementById('timer');
 
-
+// console.log(answerBtnEl)
 
 // addEventListeners
 startBtnEl.addEventListener('click', startQuiz)
@@ -56,31 +56,84 @@ function startQuiz() {
     // WHEN the user clicks the START BUTTON we want the timer in the top-left corner to start counting down from 60.
     timer();
 
-    
-    // WHEN the question screen appears we want the first question to appear on the HTML provided.
-    showQuestion();
-    console.log(randomQuestion);
-};
-
-function showQuestion() {
-
     // WHEN the quiz starts we want the quiz to be in a random array so that it's never the same.
     questionIndex = 0;
-    randomQuestion = quizQuestions.sort(() => Math.random() - .5);
+    let randomQuestion = quizQuestions.sort(() => Math.random() - .5);
+    
+    // WHEN the question screen appears we want the first question to appear on the HTML provided.
+    showQuestion(randomQuestion);
+    // console.log(randomQuestion);
+};
+
+function showQuestion(randomQuestion) {
 
     // THEN the user is presented with a question. 
-    currentQuestion = randomQuestion[questionIndex].question;
-    questionEl.innerText = currentQuestion
+    currentQuestion = randomQuestion[questionIndex];
+    questionEl.innerText = currentQuestion.question
+
+    console.log(randomQuestion);
     
-    answer.forEach(answer => {
-        const btnNumber = answer.dataset['number'];
-        answerBtnEl.innerText = currentQuestion['answer' + number];
-    });
+    answerBtnAEl.innerText = 'A. ' + currentQuestion.answer1
+    answerBtnBEl.innerText = 'B. ' + currentQuestion.answer2
+    answerBtnCEl.innerText = 'C. ' + currentQuestion.answer3
+    answerBtnDEl.innerText = 'D. ' + currentQuestion.answer4
+
+    answerBtnAEl.value = currentQuestion.answer1
+    answerBtnBEl.value = currentQuestion.answer2
+    answerBtnCEl.value = currentQuestion.answer3
+    answerBtnDEl.value = currentQuestion.answer4
+
+    let correctAnswer = currentQuestion.correctAnswer
+
+    handleAnswerClick(correctAnswer)
 
 };
 
-function wrongAnswer(timer) {
+function handleAnswerClick(correctAnswer) {
+    
+    answerBtnAEl.addEventListener('click', () => {
+        if (answerBtnAEl.value == correctAnswer) {
+            rightAnswer()
+        }
+        else {
+            wrongAnswer()
+        }
+    })
+    answerBtnBEl.addEventListener('click', () => {
+        if (answerBtnBEl.value == correctAnswer) {
+            rightAnswer()
+        }
+        else {
+            wrongAnswer()
+        }
+    })
+    answerBtnCEl.addEventListener('click', () => {
+        if (answerBtnCEl.value == correctAnswer) {
+            rightAnswer()
+        }
+        else {
+            wrongAnswer()
+        }
+    })
+    answerBtnDEl.addEventListener('click', () => {
+        if (answerBtnDEl.value == correctAnswer) {
+            rightAnswer()
+        }
+        else {
+            wrongAnswer()
+        }
+    })
+    // if (correctAnswer = )
+}
 
+function rightAnswer() {
+    // increment question index
+    
+    // run show question again
+}
+
+function wrongAnswer() {
+    // decrease the amount of time left.
 };
 
 function submitScore() {
@@ -92,82 +145,82 @@ function submitScore() {
 let quizQuestions = [
     {
         question: 'Who do you play in the main games?',
-        answer: 'Zelda',
-        answer: 'Tingle',
-        answer: 'Skull Kid',
-        answer: 'Link',
-        correct: 'Link',
+        answer1: 'Zelda',
+        answer2: 'Tingle',
+        answer3: 'Skull Kid',
+        answer4: 'Link',
+        correctAnswer: 'Link',
     },
     {
         question: 'What is the TriForce?',
-        answer: 'The power of the Golden Goddesses',
-        answer: 'Tattoo for members of the Yiga Clan',
-        answer: 'The instrument Link plays music with',
-        answer: 'A powerful finishing move',
+        answer1: 'The power of the Golden Goddesses',
+        answer2: 'Tattoo for members of the Yiga Clan',
+        answer3: 'The instrument Link plays music with',
+        answer4: 'A powerful finishing move',
         correctAnswer: 'The power of the Golden Goddesses',
     },
     {
         question: 'Who is the usual main antagonist?',
-        answer: 'Zant',
-        answer: 'King of Red Lions',
-        answer: 'Majora',
-        answer: 'Ganon',
+        answer1: 'Zant',
+        answer2: 'King of Red Lions',
+        answer3: 'Majora',
+        answer4: 'Ganon',
         correctAnswer: 'Ganon',
     },
     {
         question: 'What does each piece of the TriForce stand for?',
-        answer: 'Cool, Calm, and Collected',
-        answer: 'Water, Fire, and Grass',
-        answer: 'Power, Wisdom, and Courage',
-        answer: 'Love, Peace, and Tranquility',
+        answer1: 'Cool, Calm, and Collected',
+        answer2: 'Water, Fire, and Grass',
+        answer3: 'Power, Wisdom, and Courage',
+        answer4: 'Love, Peace, and Tranquility',
         correctAnswer: 'Power, Wisdom, and Courage',
     },
     {
         question: 'Who created the Legend of Zelda?',
-        answer: 'Shigeru Miyamoto',
-        answer: 'Takashi Tezuke',
-        answer: 'Shigeki Morimoto',
-        answer: 'Koji Okada',
+        answer1: 'Shigeru Miyamoto',
+        answer2: 'Takashi Tezuke',
+        answer3: 'Shigeki Morimoto',
+        answer4: 'Koji Okada',
         correctAnswers: 'Shigeru Miyamoto',
     },
     {
         question: 'What is Zelda\'s alter ego in Ocarina of Time?',
-        answer: 'Impa',
-        answer: 'Sheik',
-        answer: 'Tetra',
-        answer: 'Saria',
+        answer1: 'Impa',
+        answer2: 'Sheik',
+        answer3: 'Tetra',
+        answer4: 'Saria',
         correctAnswer: 'Sheik',
     },
     {
         question: 'When was the first Legend of Zelda originally released?',
-        answer: '1986',
-        answer: '1982',
-        answer: '1985',
-        answer: '1990',
+        answer1: '1986',
+        answer2: '1982',
+        answer3: '1985',
+        answer4: '1990',
         correctAnswer: '1986',
     },
     {
         question: 'Which of the games is set in the span of 3 days?',
-        answer: 'Wind Waker',
-        answer: 'Link\s Awakening',
-        answer: 'Majora\'s Mask',
-        answer: 'Minish Cap',
+        answer1: 'Wind Waker',
+        answer2: 'Link\s Awakening',
+        answer3: 'Majora\'s Mask',
+        answer4: 'Minish Cap',
         correctAnswer: 'Majora\'s Mask',
     },
     {
         question: 'Which of the games main plot involves time travel?',
-        answer: 'Skyward Sword',
-        answer: 'Twilight Princess',
-        answer: 'The Adventure of Link',
-        answer: 'Ocarina of Time',
+        answer1: 'Skyward Sword',
+        answer2: 'Twilight Princess',
+        answer3: 'The Adventure of Link',
+        answer4: 'Ocarina of Time',
         correctAnswer:'Ocarina of Time',
     },
     {
         question: 'What is the best selling Legend of Zelda game?',
-        answer: 'Ocarina of Time',
-        answer: 'Legend of Zelda (the Original)',
-        answer: 'Breath of the Wild',
-        answer: 'Phantom Hourglass',
+        answer1: 'Ocarina of Time',
+        answer2: 'Legend of Zelda (the Original)',
+        answer3: 'Breath of the Wild',
+        answer4: 'Phantom Hourglass',
         correctAnswer: 'Breath of the Wild',
     }
 ];
