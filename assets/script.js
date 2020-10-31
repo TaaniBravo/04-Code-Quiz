@@ -6,19 +6,24 @@ let startScreenEl = document.getElementById('startScreen');
 // Question Screen Variables
 let questionEl = document.getElementById('question');
 let questionContainerEl = document.getElementById('questionContainer');
+
 let answerBtnAEl = document.getElementById('answer1');
 let answerBtnBEl = document.getElementById('answer2');
 let answerBtnCEl = document.getElementById('answer3');
 let answerBtnDEl = document.getElementById('answer4');
-let randomQuestion, questionIndex
+
 let correctEl = document.getElementById('correctSign');
 let wrongEl = document.getElementById('wrongSign');
 let correctWrongSectionEl = document.getElementById('correctAndWrong');
 
+let randomQuestion;
+let questionIndex;
+let currentQuestion;
+
 // Game Over Screen Variables
 let gameOverEl = document.getElementById('gameOverScreen');
 let submitBtnEl = document.getElementById('submitBtn');
-let retakeBtnEL = document.getElementById('retakeBtn');
+let retakeBtnEl = document.getElementById('retakeBtn');
 let userIdEL = document.getElementById('#userInitials');
 
 // Timer/Score Variables
@@ -28,8 +33,12 @@ let timerDisplayEL = document.getElementById('timer');
 // console.log(answerBtnEl)
 
 // addEventListeners
+// This event listener will start the quiz.
 startBtnEl.addEventListener('click', startQuiz)
-// answerBtnAEl.addEventListener('click', quizQuestions.answers.correct[1], nextQuestion)
+// This event listener will restart the quiz for people that have got to the Game Over Screen.
+// retakeBtnEl.addEventListener('click', startQuiz)
+
+
 
 // Functions
 function timer() {
@@ -54,14 +63,15 @@ function timer() {
 function startQuiz() {
     // WHEN the user clicks the START BUTTON we want the start screen to switch with the question screen.
     startScreenEl.classList.add('hide');
-    questionContainerEl.classList.remove('hide')
+    questionContainerEl.classList.remove('hide');
+    gameOverEl.classList.add('hide');
 
     // WHEN the user clicks the START BUTTON we want the timer in the top-left corner to start counting down from 60.
     timer();
 
     // WHEN the quiz starts we want the quiz to be in a random array so that it's never the same.
-    let questionIndex = 0;
-    let randomQuestion = quizQuestions.sort(() => Math.random() - .5);
+    questionIndex = 0;
+    randomQuestion = quizQuestions.sort(() => Math.random() - .5);
     
     // WHEN the question screen appears we want the first question to appear on the HTML provided.
     showQuestion(randomQuestion, questionIndex);
@@ -71,7 +81,7 @@ function startQuiz() {
 function showQuestion(randomQuestion, questionIndex) {
 
     // THEN the user is presented with a question. 
-    currentQuestion = randomQuestion[questionIndex];
+    let currentQuestion = randomQuestion[questionIndex];
     questionEl.innerText = currentQuestion.question
 
     // The innerText of each btn is set to the currentQuestions answers.
@@ -88,6 +98,7 @@ function showQuestion(randomQuestion, questionIndex) {
 
     let correctAnswer = currentQuestion.correctAnswer
 
+    console.log(currentQuestion, randomQuestion, questionIndex)
     console.log(currentQuestion.correctAnswer)
 
     handleAnswerClick(correctAnswer)
@@ -205,7 +216,7 @@ let quizQuestions = [
         answer2: 'Takashi Tezuke',
         answer3: 'Shigeki Morimoto',
         answer4: 'Koji Okada',
-        correctAnswers: 'Shigeru Miyamoto',
+        correctAnswer: 'Shigeru Miyamoto',
     },
     {
         question: 'What is Zelda\'s alter ego in Ocarina of Time?',
