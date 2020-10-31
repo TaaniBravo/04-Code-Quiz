@@ -11,6 +11,9 @@ let answerBtnBEl = document.getElementById('answer2');
 let answerBtnCEl = document.getElementById('answer3');
 let answerBtnDEl = document.getElementById('answer4');
 let randomQuestion, questionIndex
+let correctEl = document.getElementById('correctSign');
+let wrongEl = document.getElementById('wrongSign');
+let correctWrongSectionEl = document.getElementById('correctAndWrong');
 
 // Game Over Screen Variables
 let gameOverEl = document.getElementById('gameOverScreen');
@@ -57,33 +60,35 @@ function startQuiz() {
     timer();
 
     // WHEN the quiz starts we want the quiz to be in a random array so that it's never the same.
-    questionIndex = 0;
+    let questionIndex = 0;
     let randomQuestion = quizQuestions.sort(() => Math.random() - .5);
     
     // WHEN the question screen appears we want the first question to appear on the HTML provided.
-    showQuestion(randomQuestion);
-    // console.log(randomQuestion);
+    showQuestion(randomQuestion, questionIndex);
+    
 };
 
-function showQuestion(randomQuestion) {
+function showQuestion(randomQuestion, questionIndex) {
 
     // THEN the user is presented with a question. 
     currentQuestion = randomQuestion[questionIndex];
     questionEl.innerText = currentQuestion.question
 
-    console.log(randomQuestion);
-    
+    // The innerText of each btn is set to the currentQuestions answers.
     answerBtnAEl.innerText = 'A. ' + currentQuestion.answer1
     answerBtnBEl.innerText = 'B. ' + currentQuestion.answer2
     answerBtnCEl.innerText = 'C. ' + currentQuestion.answer3
     answerBtnDEl.innerText = 'D. ' + currentQuestion.answer4
 
+    // The values are also set as we will use this to get the correctAnswer.
     answerBtnAEl.value = currentQuestion.answer1
     answerBtnBEl.value = currentQuestion.answer2
     answerBtnCEl.value = currentQuestion.answer3
     answerBtnDEl.value = currentQuestion.answer4
 
     let correctAnswer = currentQuestion.correctAnswer
+
+    console.log(currentQuestion.correctAnswer)
 
     handleAnswerClick(correctAnswer)
 
@@ -92,11 +97,14 @@ function showQuestion(randomQuestion) {
 function handleAnswerClick(correctAnswer) {
     
     answerBtnAEl.addEventListener('click', () => {
+        // IF this value is the correct answer then we want the rightAnswer function to activate.
         if (answerBtnAEl.value == correctAnswer) {
             rightAnswer()
         }
+        // ELSE we want the wrongAnswer function to activate and then RETURN the user.
         else {
             wrongAnswer()
+            return;
         }
     })
     answerBtnBEl.addEventListener('click', () => {
@@ -105,6 +113,7 @@ function handleAnswerClick(correctAnswer) {
         }
         else {
             wrongAnswer()
+            return;
         }
     })
     answerBtnCEl.addEventListener('click', () => {
@@ -113,6 +122,7 @@ function handleAnswerClick(correctAnswer) {
         }
         else {
             wrongAnswer()
+            return;
         }
     })
     answerBtnDEl.addEventListener('click', () => {
@@ -121,6 +131,7 @@ function handleAnswerClick(correctAnswer) {
         }
         else {
             wrongAnswer()
+            return;
         }
     })
     // if (correctAnswer = )
@@ -128,12 +139,25 @@ function handleAnswerClick(correctAnswer) {
 
 function rightAnswer() {
     // increment question index
-    
+    questionIndex+= 1
+
     // run show question again
+    showQuestion()
 }
 
 function wrongAnswer() {
     // decrease the amount of time left.
+    timeLeft-= 5
+
+    // REMOVE the hide class attached to these elements so the user knows they are wrong.
+    correctWrongSectionEl.classList.remove('hide')
+    wrongEl.classList.remove('hide')
+
+    setInterval(() => {
+        // THEN ADD the hide class again so that the elements don't stay on the page after 750ms.
+        correctWrongSectionEl.classList.add('hide')
+        wrongEl.classList.add('hide')
+    }, 750);
 };
 
 function submitScore() {
