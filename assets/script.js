@@ -7,11 +7,6 @@ const startScreenEl = document.getElementById('startScreen');
 const questionEl = document.getElementById('question');
 const questionContainerEl = document.getElementById('questionContainer');
 
-// const answerBtnAEl = document.getElementById('answer1');
-// const answerBtnBEl = document.getElementById('answer2');
-// const answerBtnCEl = document.getElementById('answer3');
-// const answerBtnDEl = document.getElementById('answer4');
-
 const answers = Array.from(document.querySelectorAll('.answerBtn'));
 
 const correctEl = document.getElementById('correctSign');
@@ -21,6 +16,7 @@ const correctWrongSectionEl = document.getElementById('correctAndWrong');
 let randomQuestion;
 let questionIndex;
 let currentQuestion;
+// let correctAnswer = currentQuestion.correctAnswer
 
 // Game Over Screen Variables
 const gameOverEl = document.getElementById('gameOverScreen');
@@ -30,9 +26,8 @@ const userIdEL = document.getElementById('#userInitials');
 
 // Timer/Score Variables
 let timeLeft = 75;
+let timePenalty = 5
 const timerDisplayEL = document.getElementById('timer');
-
-// console.log(answerBtnEl)
 
 // addEventListeners
 // This event listener will start the quiz.
@@ -78,21 +73,24 @@ function startQuiz() {
     
     // WHEN the question screen appears we want the first question to appear on the HTML provided.
     showNewQuestion(randomQuestion, questionIndex);
+
     
 };
 
-function showNewQuestion(randomQuestion, questionIndex) {
+function showNewQuestion() {
+
+    if (questionIndex >= randomQuestion.length) {
+        clearInterval(timeLeft)
+        score = timeLeft
+        questionContainerEl.classList.remove('hide');
+        gameOverEl.classList.remove('hide')
+    }
+
+    // let correctAnswer = randomQuestion[questionIndex].correctAnswer
 
     // THEN the user is presented with a question. 
     let currentQuestion = randomQuestion[questionIndex];
     questionEl.innerText = currentQuestion.question
-
-    // if (questionIndex >= 10) {
-    //     clearInterval(timeLeft)
-    //     score = timeLeft
-    //     questionContainerEl.classList.remove('hide');
-    //     gameOverEl.classList.remove('hide')
-    // }
 
     // AND the answers provided in each button for them that they can choose from.
     answers.forEach(answer => {
@@ -100,126 +98,64 @@ function showNewQuestion(randomQuestion, questionIndex) {
         const number = answer.dataset['number'];
         // APPEND the innerText to what is provided for the currentQuestions answers.
         answer.innerText = number + '. ' + currentQuestion['answer' + number];
+
+       
     })
 
-    currentQuestion.correctAnswer = true
+    let correctAnswer = currentQuestion.correctAnswer
+
+    handleAnswerClick(correctAnswer)
+
+    // acceptingAnswers = true
 
 };
 
+function handleAnswerClick(correctAnswer) {
 // FOR EACH answer if the user clicks on a button we want certain actions to happen.
 answers.forEach(answer => {
     answer.addEventListener('click', event => {
-        // IF the user clicks on the wrong button
-        // if (answer.dataset['number'] != currentQuestion.correctAnswer) {
-        //     // THEN 5 seconds are taken off of the timer.
-        //     timeLeft -= 5
-        //     correctWrongSectionEl.classList.remove('hide')
-        //     wrongEl.classList.remove('hide')
+        event.preventDefault();
+        const selectedAnswer = event.target.dataset.number
 
-        //     setTimeout(() => {
-        //         correctWrongSectionEl.classList.add('hide')
-        //         wrongEl.classList.add('hide')
-        //     }, 1000);
-        // };
-
-        questionIndex++
-
-        correctWrongSectionEl.classList.remove('hide')
-        correctEl.classList.remove('hide')
+    if (selectedAnswer == correctAnswer) {
+        correctWrongSectionEl.classList.remove('hide');
+        correctEl.classList.remove('hide');
 
         setTimeout(() => {
-            correctWrongSectionEl.classList.add('hide')
-            correctEl.classList.add('hide')
-            showNewQuestion(randomQuestion, questionIndex)
+            questionIndex++
+            correctWrongSectionEl.classList.add('hide');
+            correctEl.classList.add('hide');
+            showNewQuestion();
+            return;
         }, 1000);
+    }
+
+    else if (selectedAnswer != correctAnswer) {
+        correctWrongSectionEl.classList.remove('hide');
+        wrongEl.classList.remove('hide');
+        timeLeft -= timePenalty
+
+        setTimeout(() => {
+            correctWrongSectionEl.classList.add('hide');
+            wrongEl.classList.add('hide');
+            return;
+        }, 1000);
+
+    }
+    console.log('Correct Answer: ' + correctAnswer)
+    console.log('Selected answer: ' + selectedAnswer)
     })
+    
 })
+// console.log(handleAnswerClick())
+};
 
-// function handleAnswerClick(correctAnswer) {
-    
-//     answerBtnAEl.addEventListener('click', () => {
-//         // IF this value is the correct answer then we want the rightAnswer function to activate.
-//         if (answerBtnAEl.value == correctAnswer) {
-//             rightAnswer();
-//         }
-//         // ELSE we want the wrongAnswer function to activate and then RETURN the user.
-//         else {
-//             wrongAnswer();
-//             return;
-//         };
-//     });
-//     answerBtnBEl.addEventListener('click', () => {
-//         if (answerBtnBEl.value == correctAnswer) {
-//             rightAnswer();
-//         }
-//         else {
-//             wrongAnswer();
-//             return;
-//         };
-//     });
-//     answerBtnCEl.addEventListener('click', () => {
-//         if (answerBtnCEl.value == correctAnswer) {
-//             rightAnswer();
-//         }
-//         else {
-//             wrongAnswer()
-//             return;
-//         };
-//     });
-//     answerBtnDEl.addEventListener('click', () => {
-//         if (answerBtnDEl.value == correctAnswer) {
-//             rightAnswer();
-//         }
-//         else {
-//             wrongAnswer()
-//             return;
-//         };
-//     });
-// };
 
-function rightAnswer() {
-    // increment question index
-    questionIndex++;
-
-    // REMOVE the hide class attached to these elements so the user knows they are wrong.
-    correctWrongSectionEl.classList.remove('hide')
-    correctEl.classList.remove('hide')
-
-    setTimeout(() => {
-        // THEN ADD the hide class again so that the elements don't stay on the page after 750ms.
-        correctWrongSectionEl.classList.add('hide')
-        correctEl.classList.add('hide')
-    }, 1000);
-
-    resetValue();
-
-    // run show question again
-    setTimeout(showNewQuestion(randomQuestion, questionIndex), 1000);
+function decreaseScore(timer) {
+    timer
+    timeleft-=5
+    return;
 }
-
-function resetValue() {
-    
-    answerBtnAEl.removeAttribute('value');
-    answerBtnBEl.removeAttribute('value');
-    answerBtnCEl.removeAttribute('value');
-    answerBtnDEl.removeAttribute('value');
-};
-
-function wrongAnswer() {
-
-    // decrease the amount of time left.
-    timeLeft-= 5
-
-    // REMOVE the hide class attached to these elements so the user knows they are wrong.
-    correctWrongSectionEl.classList.remove('hide')
-    wrongEl.classList.remove('hide')
-
-    setTimeout(() => {
-        // THEN ADD the hide class again so that the elements don't stay on the page after 750ms.
-        correctWrongSectionEl.classList.add('hide')
-        wrongEl.classList.add('hide')
-    }, 1000);
-};
 
 function submitScore() {
 // WHEN the game is over then the user can save their name and score and it updates to the leaderboard.
@@ -227,7 +163,7 @@ function submitScore() {
 };
 
 // Quiz Question Index
-let quizQuestions = [
+const quizQuestions = [
     {
         question: 'Who do you play in the main games?',
         answer1: 'Zelda',
