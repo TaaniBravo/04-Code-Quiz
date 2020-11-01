@@ -172,7 +172,15 @@ button {
     padding: 0 25px;
 }
 
+#usernames, #scores {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+}
 
+#scores {
+    list-style-type: none;
+}
 
 .hide {
     /* This will allow the javascript to dictate which of the sections are viewable at the moment. */

@@ -17,18 +17,18 @@ const correctWrongSectionEl = document.getElementById('correctAndWrong');
 let randomQuestion;
 let questionIndex;
 let currentQuestion;
-// let correctAnswer = currentQuestion.correctAnswer
 
 // Game Over Screen Variables
 const gameOverEl = document.getElementById('gameOverScreen');
 const submitBtnEl = document.getElementById('submitBtn');
 const retakeBtnEl = document.getElementById('retakeBtn');
-const userIdEL = document.getElementById('#userInitials').value;
 
 // Leaderboard Screen Variables
 const highscoreEl = document.querySelector('#highscores');
 const usernamesEl = document.querySelector('#usernames');
 const scoresEl = document.querySelector('#scores');
+const userInputEL = document.querySelector('#userInitials');
+let leaderboard = [];
 
 // Timer/Score Variables
 let timeLeft = 75;
@@ -166,19 +166,47 @@ answers.forEach(answer => {
 
 function submitScore() {
 // WHEN the game is over then the user can save their name and score and it updates to the leaderboard.
-    let score = timeLeft
-    let userScore = {
-        User: userIdEL, 
-        Score: score}
-
-    let userScoreSerialized = JSON.stringify(userScore)
-    localStorage.setItem("userScore", userScoreSerialized)
-
-    console.log(localStorage)
-
-    highscoreEl.classList.remove('hide')
-    gameOverEl.classList.add('hide')
     
+    // IF the user INPUTS nothing for the username then they are RETURNED out of this function from storing.
+    if (userInputEL.value < 1) return;
+
+    // ELSE the user is brought to the Leaderboard screen with their new updated score.
+    else {
+        let score = timeLeft
+        // The user's initials and their score are stored in this object.
+        let userScore = {
+            User: userInputEL.value, 
+            // The Score is our score + 1 so that the score the user sees is consistent to the timeLeft on the timer.
+            Score: score + 1}
+
+        leaderboard.push(userScore)
+        console.log(leaderboard)
+        // We then need to STRINGIFY the object so that we can STORE it in LOCALSTORAGE.
+        let userScoreSerialized = JSON.stringify(userScore)
+        localStorage.setItem("userScore", userScoreSerialized)
+        
+        // console.log(userInputEL.value)
+        console.log(localStorage)
+
+        highscoreEl.classList.remove('hide')
+        gameOverEl.classList.add('hide')
+
+        let finalScore = JSON.parse(localStorage.getItem('userScore'));
+        console.log(finalScore);
+
+        const usernameList = document.createElement('li');
+        const scoreList = document.createElement('li');
+
+        usernameList.innerHTML+= finalScore.User.toUpperCase();
+        scoreList.innerHTML+= finalScore.Score;
+
+        usernamesEl.appendChild(usernameList);
+        scoresEl.appendChild(scoreList);
+
+
+
+        console.log(finalScore.User)
+    }
 
 };
 
