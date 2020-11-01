@@ -23,7 +23,7 @@ let currentQuestion;
 const gameOverEl = document.getElementById('gameOverScreen');
 const submitBtnEl = document.getElementById('submitBtn');
 const retakeBtnEl = document.getElementById('retakeBtn');
-const userIdEL = document.getElementById('#userInitials');
+const userIdEL = document.getElementById('#userInitials').value;
 
 // Leaderboard Screen Variables
 const highscoreEl = document.querySelector('#highscores');
@@ -32,7 +32,6 @@ const scoresEl = document.querySelector('#scores');
 
 // Timer/Score Variables
 let timeLeft = 75;
-let score = timeLeft
 const timerDisplayEL = document.getElementById('timer');
 let interval;
 
@@ -167,11 +166,15 @@ answers.forEach(answer => {
 
 function submitScore() {
 // WHEN the game is over then the user can save their name and score and it updates to the leaderboard.
-    const userScore = {
-        "User":userIdEL, 
-        "Score":score}
+    let score = timeLeft
+    let userScore = {
+        User: userIdEL, 
+        Score: score}
 
-    localStorage.setItem("str", userScore)
+    let userScoreSerialized = JSON.stringify(userScore)
+    localStorage.setItem("userScore", userScoreSerialized)
+
+    console.log(localStorage)
 
     highscoreEl.classList.remove('hide')
     gameOverEl.classList.add('hide')
