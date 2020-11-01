@@ -29,6 +29,7 @@ const usernamesEl = document.querySelector('#usernames');
 const scoresEl = document.querySelector('#scores');
 const userInputEL = document.querySelector('#userInitials');
 let leaderboard = [];
+const retakeBtn2El = document.querySelector('#retakeBtn2')
 
 // Timer/Score Variables
 let timeLeft = 75;
@@ -41,6 +42,7 @@ startBtnEl.addEventListener('click', startQuiz)
 
 // This event listener will restart the quiz for people that have got to the Game Over Screen.
 retakeBtnEl.addEventListener('click', reloadTest)
+retakeBtn2El.addEventListener('click', reloadTest)
 
 // This event listener will allow the user to store their score and add their initials.
 submitBtnEl.addEventListener('click', submitScore)

@@ -182,6 +182,12 @@ button {
     list-style-type: none;
 }
 
+#retake-container {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
 .hide {
     /* This will allow the javascript to dictate which of the sections are viewable at the moment. */
     display: none !important;
