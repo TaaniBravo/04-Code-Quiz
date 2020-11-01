@@ -149,6 +149,31 @@ button {
     margin: 5px;
 }
 
+#highscores h1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: cursive;
+    margin-bottom: 20px;
+    color: purple;
+    font-size: 2em;
+}
+
+#userScore-container {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+#userScore-container h2 {
+    border-bottom: purple solid 3px;
+    padding: 0 25px;
+}
+
+
+
 .hide {
     /* This will allow the javascript to dictate which of the sections are viewable at the moment. */
     display: none !important;

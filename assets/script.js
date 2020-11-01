@@ -2,6 +2,7 @@
 // Start Screen Variables
 const startBtnEl = document.getElementById('startBtn');
 const startScreenEl = document.getElementById('startScreen');
+const viewHighscoresEl = document.getElementById('viewHighscores')
 
 // Question Screen Variables
 const questionEl = document.getElementById('question');
@@ -24,6 +25,11 @@ const submitBtnEl = document.getElementById('submitBtn');
 const retakeBtnEl = document.getElementById('retakeBtn');
 const userIdEL = document.getElementById('#userInitials');
 
+// Leaderboard Screen Variables
+const highscoreEl = document.querySelector('#highscores');
+const usernamesEl = document.querySelector('#usernames');
+const scoresEl = document.querySelector('#scores');
+
 // Timer/Score Variables
 let timeLeft = 75;
 let score = timeLeft
@@ -39,6 +45,12 @@ retakeBtnEl.addEventListener('click', reloadTest)
 
 // This event listener will allow the user to store their score and add their initials.
 submitBtnEl.addEventListener('click', submitScore)
+viewHighscoresEl.addEventListener('click', () => {
+    startScreenEl.classList.add('hide');
+    questionContainerEl.classList.add('hide');
+    gameOverEl.classList.add('hide');
+    highscoreEl.classList.remove('hide');
+})
 
 
 // Functions
@@ -161,7 +173,9 @@ function submitScore() {
 
     localStorage.setItem("str", userScore)
 
-    return location.assign('/highscores.html')
+    highscoreEl.classList.remove('hide')
+    gameOverEl.classList.add('hide')
+    
 
 };
 
