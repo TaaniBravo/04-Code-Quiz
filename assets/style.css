@@ -113,7 +113,7 @@ button {
 .answerBtn {
     flex-flow: column wrap;
     width: 50%;
-    margin: 0 0 20px 0;
+    margin: 10px;
     font-size: 1.05em;
 }
 
