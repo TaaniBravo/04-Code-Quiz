@@ -25,11 +25,20 @@ const retakeBtnEl = document.getElementById('retakeBtn');
 
 // Leaderboard Screen Variables
 const highscoreEl = document.querySelector('#highscores');
-const usernamesEl = document.querySelector('#usernames');
-const scoresEl = document.querySelector('#scores');
+// const usernamesEl = document.querySelector('#usernames');
+// const scoresEl = document.querySelector('#scores');
 const userInputEL = document.querySelector('#userInitials');
-let leaderboard = [];
-const retakeBtn2El = document.querySelector('#retakeBtn2')
+const scoresEl = Array.from(document.querySelectorAll('.scores'));
+const usernamesEL = Array.from(document.querySelectorAll('.usernames'));
+const retakeBtn2El = document.querySelector('#retakeBtn2');
+// const leaderboardTableEl = document.querySelector('#leaderboard-body');
+
+// This is going to grab our highscores for our 'leaderboard' OR it will start an empty string if there aren't any.
+const leaderboard =  JSON.parse(localStorage.getItem('leaderboard')) || [];
+let usernameIndex = 0;
+let highscoreIndex = 0;
+// We want our leaderboard to stop at TOP TEN scores.
+const maxHighscores = 10
 
 // Timer/Score Variables
 let timeLeft = 75;
@@ -38,20 +47,31 @@ let interval;
 
 // addEventListeners
 // This event listener will start the quiz.
-startBtnEl.addEventListener('click', startQuiz)
+startBtnEl.addEventListener('click', startQuiz);
 
 // This event listener will restart the quiz for people that have got to the Game Over Screen.
-retakeBtnEl.addEventListener('click', reloadTest)
-retakeBtn2El.addEventListener('click', reloadTest)
+retakeBtnEl.addEventListener('click', reloadTest);
+retakeBtn2El.addEventListener('click', reloadTest);
 
 // This event listener will allow the user to store their score and add their initials.
-submitBtnEl.addEventListener('click', submitScore)
+submitBtnEl.addEventListener('click', submitScore);
 viewHighscoresEl.addEventListener('click', () => {
     startScreenEl.classList.add('hide');
     questionContainerEl.classList.add('hide');
     gameOverEl.classList.add('hide');
     highscoreEl.classList.remove('hide');
-})
+
+    usernamesEL.forEach(username => {
+        let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
+        username.innerText = 
+        usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User.toUpperCase();
+    })
+
+    scoresEl.forEach(score => {
+        let allScores = JSON.parse(localStorage.getItem('leaderboard'));
+        score.innerText = allScores[highscoreIndex++].Score;
+        })
+});
 
 
 // Functions
@@ -64,14 +84,14 @@ function startClock() {
             clearInterval(timeLeft = 0);
             // Once the interval is cleared and the timer hits 0 the game is over and user is prompted to the 'gameOverScreen'
             startScreenEl.classList.add('hide');
-            questionContainerEl.classList.add('hide')
-            gameOverEl.classList.remove('hide')
+            questionContainerEl.classList.add('hide');
+            gameOverEl.classList.remove('hide');
         };
         // We need to now render the time so that we see it in our display.
-        timerDisplayEL.innerHTML = ('Timer/Score: ' + timeLeft)
+        timerDisplayEL.innerHTML = ('Timer/Score: ' + timeLeft);
         // And then set timeLeft to -1 every second.
-        timeLeft -= 1
-    }, 1000)     
+        timeLeft -= 1;
+    }, 1000);
 };
 
 function startQuiz() {
@@ -142,8 +162,8 @@ answers.forEach(answer => {
             correctEl.classList.add('hide');
         }, 1000);
 
-        questionIndex++
-        showNewQuestion(randomQuestion, questionIndex)
+        questionIndex++;
+        showNewQuestion(randomQuestion, questionIndex);
     }
 
     // ELSE IF the user clicks the wrong answer...
@@ -153,7 +173,7 @@ answers.forEach(answer => {
         wrongEl.classList.remove('hide');
 
         // AND there is 5 seconds subtracted from the total amount of timeLeft.
-        timeLeft-=5
+        timeLeft-=5;
 
         // THEN AFTER 1 second, we want the wrong sign to disappear.
         setTimeout(() => {
@@ -182,32 +202,31 @@ function submitScore() {
             Score: score + 1}
 
         leaderboard.push(userScore)
-        console.log(leaderboard)
-        // We then need to STRINGIFY the object so that we can STORE it in LOCALSTORAGE.
-        let userScoreSerialized = JSON.stringify(userScore)
-        localStorage.setItem("userScore", userScoreSerialized)
+
+        // IF the 'b' score is higher than the 'a' score then put 'b' higher than 'a'.
+        leaderboard.sort( (a,b) => b.Score - a.Score);
         
-        // console.log(userInputEL.value)
-        console.log(localStorage)
+        // THEN if the user score is high enough to make the 'leaderboard' the lowest score will be taken off.
+        leaderboard.splice(10)
+
+        // WE WANT TO then set our scores in place for the leaderboard.
+        // We then need to STRINGIFY the object so that we can STORE it in LOCALSTORAGE.
+        localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+        
 
         highscoreEl.classList.remove('hide')
         gameOverEl.classList.add('hide')
 
-        let finalScore = JSON.parse(localStorage.getItem('userScore'));
-        console.log(finalScore);
-
-        const usernameList = document.createElement('li');
-        const scoreList = document.createElement('li');
-
-        usernameList.innerHTML+= finalScore.User.toUpperCase();
-        scoreList.innerHTML+= finalScore.Score;
-
-        usernamesEl.appendChild(usernameList);
-        scoresEl.appendChild(scoreList);
-
-
-
-        console.log(finalScore.User)
+        usernamesEL.forEach(username => {
+            let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
+            username.innerText = 
+            usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User.toUpperCase();
+        });
+    
+        scoresEl.forEach(score => {
+            let allScores = JSON.parse(localStorage.getItem('leaderboard'));
+            score.innerText = allScores[highscoreIndex++].Score;
+            });
     }
 
 };

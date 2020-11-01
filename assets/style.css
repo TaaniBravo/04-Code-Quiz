@@ -159,7 +159,7 @@ button {
     font-size: 2em;
 }
 
-#userScore-container {
+#userScore-container, #leaderboard-table {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
@@ -172,15 +172,36 @@ button {
     padding: 0 25px;
 }
 
-#usernames, #scores {
+/* #usernames, #scores {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+} */
+
+.usernames, .scores {
     display: flex;
     justify-content: center;
     padding: 5px 0;
 }
 
-#scores {
+.scores {
     list-style-type: none;
 }
+
+/* tbody {
+    width: 100%;
+}
+
+th {
+    border-bottom: purple solid 3px;
+    padding: 0 25px;
+}
+
+tr {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0;
+} */
 
 #retake-container {
     width: 100%;
