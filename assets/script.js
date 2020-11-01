@@ -26,6 +26,7 @@ const userIdEL = document.getElementById('#userInitials');
 
 // Timer/Score Variables
 let timeLeft = 75;
+let score = timeLeft
 const timerDisplayEL = document.getElementById('timer');
 let interval;
 
@@ -36,6 +37,8 @@ startBtnEl.addEventListener('click', startQuiz)
 // This event listener will restart the quiz for people that have got to the Game Over Screen.
 retakeBtnEl.addEventListener('click', reloadTest)
 
+// This event listener will allow the user to store their score and add their initials.
+submitBtnEl.addEventListener('click', submitScore)
 
 
 // Functions
@@ -80,11 +83,14 @@ function startQuiz() {
 
 function showNewQuestion(randomQuestion, questionIndex) {
 
+    // IF the user reaches the end of the quiz...
     if (questionIndex >= randomQuestion.length) {
+        // THEN we want to stop the timer and 
         clearInterval(interval)
-        const score = timeLeft
+        // Have the END screen show up.
         questionContainerEl.classList.add('hide');
         gameOverEl.classList.remove('hide')
+        // Then we want the user to RETURN so the rest of the function does not run.
         return;
     }
 
@@ -103,16 +109,21 @@ function showNewQuestion(randomQuestion, questionIndex) {
     })
 };
 
-// FOR EACH answer if the user clicks on a button we want certain actions to happen.
+// FOR EACH answer button 
 answers.forEach(answer => {
+    // If the user CLICKS on a button we want certain actions to happen.
     answer.addEventListener('click', event => {
         event.preventDefault();
         const selectedAnswer = event.target.dataset.number
 
+    // IF the button they click on is the right answer
     if (selectedAnswer == quizQuestions[questionIndex].correctAnswer) {
+
+        // The user is NOTIFIED that they are CORRECT
         correctWrongSectionEl.classList.remove('hide');
         correctEl.classList.remove('hide');
 
+        // THEN AFTER 1 second, we want the correct sign to disappear.
         setTimeout(() => {
             correctWrongSectionEl.classList.add('hide');
             correctEl.classList.add('hide');
@@ -122,11 +133,16 @@ answers.forEach(answer => {
         showNewQuestion(randomQuestion, questionIndex)
     }
 
+    // ELSE IF the user clicks the wrong answer...
     else if (selectedAnswer != quizQuestions[questionIndex].correctAnswer) {
+        // The user is NOTIFIED that they are WRONG
         correctWrongSectionEl.classList.remove('hide');
         wrongEl.classList.remove('hide');
+
+        // AND there is 5 seconds subtracted from the total amount of timeLeft.
         timeLeft-=5
 
+        // THEN AFTER 1 second, we want the wrong sign to disappear.
         setTimeout(() => {
             correctWrongSectionEl.classList.add('hide');
             wrongEl.classList.add('hide');
@@ -139,6 +155,11 @@ answers.forEach(answer => {
 
 function submitScore() {
 // WHEN the game is over then the user can save their name and score and it updates to the leaderboard.
+    const userScore = {
+        "User":userIdEL, 
+        "Score":score}
+
+    localStorage.setItem("str", userScore)
 
 };
 
@@ -184,7 +205,7 @@ const quizQuestions = [
     {
         question: 'Who created the Legend of Zelda?',
         answer1: 'Shigeru Miyamoto',
-        answer2: 'Takashi Tezuke',
+        answer2: 'Chuck Norris',
         answer3: 'Shigeki Morimoto',
         answer4: 'Koji Okada',
         correctAnswer: 1,
