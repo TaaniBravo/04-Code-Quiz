@@ -11,6 +11,9 @@ NOTE: While the user story and criteria call for a code quiz we were given permi
     5. Q&A Cheat Sheet
     6. Resources
 
+## Visual Example
+![Alt Text](https://media.giphy.com/media/bRpOHPIcH5LnxShyEX/giphy.gif)
+
 ## User Story
 
 ```
