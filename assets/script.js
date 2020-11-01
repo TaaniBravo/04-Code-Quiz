@@ -161,10 +161,12 @@ function submitScore() {
 
     localStorage.setItem("str", userScore)
 
+    return location.assign('/highscores.html')
+
 };
 
 function reloadTest() {
-    window.location.reload();
+    location.reload();
     return;
 }
 
