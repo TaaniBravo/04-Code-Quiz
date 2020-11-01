@@ -26,20 +26,21 @@ const userIdEL = document.getElementById('#userInitials');
 
 // Timer/Score Variables
 let timeLeft = 75;
-let timePenalty = 5
 const timerDisplayEL = document.getElementById('timer');
+let interval;
 
 // addEventListeners
 // This event listener will start the quiz.
 startBtnEl.addEventListener('click', startQuiz)
+
 // This event listener will restart the quiz for people that have got to the Game Over Screen.
-// retakeBtnEl.addEventListener('click', startQuiz)
+retakeBtnEl.addEventListener('click', reloadTest)
 
 
 
 // Functions
-function timer() {
-    setInterval(function() {
+function startClock() {
+    interval = setInterval(function() {
 
         // IF the timer hit 0 we want the timer to stop.
         if (timeLeft <= 0){
@@ -65,7 +66,7 @@ function startQuiz() {
     gameOverEl.classList.add('hide');
 
     // WHEN the user clicks the START BUTTON we want the timer in the top-left corner to start counting down from 60.
-    timer();
+    startClock();
 
     // WHEN the quiz starts we want the quiz to be in a random array so that it's never the same.
     questionIndex = 0;
@@ -80,10 +81,11 @@ function startQuiz() {
 function showNewQuestion(randomQuestion, questionIndex) {
 
     if (questionIndex >= randomQuestion.length) {
-        clearInterval(timeLeft)
-        score = timeLeft
-        questionContainerEl.classList.remove('hide');
+        clearInterval(interval)
+        const score = timeLeft
+        questionContainerEl.classList.add('hide');
         gameOverEl.classList.remove('hide')
+        return;
     }
 
     // let correctAnswer = randomQuestion[questionIndex].correctAnswer
@@ -98,69 +100,52 @@ function showNewQuestion(randomQuestion, questionIndex) {
         const number = answer.dataset['number'];
         // APPEND the innerText to what is provided for the currentQuestions answers.
         answer.innerText = number + '. ' + currentQuestion['answer' + number];
-
-       
     })
-
-    let correctAnswer = currentQuestion.correctAnswer
-
-    handleAnswerClick(correctAnswer)
-
-    // acceptingAnswers = true
-
 };
 
-function handleAnswerClick(correctAnswer) {
 // FOR EACH answer if the user clicks on a button we want certain actions to happen.
 answers.forEach(answer => {
     answer.addEventListener('click', event => {
         event.preventDefault();
         const selectedAnswer = event.target.dataset.number
 
-    if (selectedAnswer == correctAnswer) {
+    if (selectedAnswer == quizQuestions[questionIndex].correctAnswer) {
         correctWrongSectionEl.classList.remove('hide');
         correctEl.classList.remove('hide');
 
         setTimeout(() => {
-            questionIndex++
             correctWrongSectionEl.classList.add('hide');
             correctEl.classList.add('hide');
-            showNewQuestion(randomQuestion, questionIndex);
-            return;
         }, 1000);
+
+        questionIndex++
+        showNewQuestion(randomQuestion, questionIndex)
     }
 
-    else if (selectedAnswer != correctAnswer) {
+    else if (selectedAnswer != quizQuestions[questionIndex].correctAnswer) {
         correctWrongSectionEl.classList.remove('hide');
         wrongEl.classList.remove('hide');
-        timeLeft -= timePenalty
+        timeLeft-=5
 
         setTimeout(() => {
             correctWrongSectionEl.classList.add('hide');
             wrongEl.classList.add('hide');
-            return;
         }, 1000);
 
     }
-    console.log('Correct Answer: ' + correctAnswer)
-    console.log('Selected answer: ' + selectedAnswer)
     })
     
 })
-// console.log(handleAnswerClick())
-};
-
-
-function decreaseScore(timer) {
-    timer
-    timeleft-=5
-    return;
-}
 
 function submitScore() {
 // WHEN the game is over then the user can save their name and score and it updates to the leaderboard.
 
 };
+
+function reloadTest() {
+    window.location.reload();
+    return;
+}
 
 // Quiz Question Index
 const quizQuestions = [
