@@ -1,6 +1,8 @@
 # Legend of Zelda Quiz!
 This is the homework assignment for week 4 of UW Coding Bootcamp. The assignment is to create a interactive quiz using JavaScript events and callback functions. For this assignment we are not given any start code. Our goal is to make the website have a clean, polished, and responsive user interface.
 
+LIVE URL: https://taanibravo.github.io/04-Legend-of-Zelda-Quiz/
+
 NOTE: While the user story and criteria call for a code quiz we were given permission to make the topic of the quiz on anything we wanted.
 
 ## Directory
