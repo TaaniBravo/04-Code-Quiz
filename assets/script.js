@@ -25,13 +25,10 @@ const retakeBtnEl = document.getElementById('retakeBtn');
 
 // Leaderboard Screen Variables
 const highscoreEl = document.querySelector('#highscores');
-// const usernamesEl = document.querySelector('#usernames');
-// const scoresEl = document.querySelector('#scores');
 const userInputEL = document.querySelector('#userInitials');
 const scoresEl = Array.from(document.querySelectorAll('.scores'));
 const usernamesEL = Array.from(document.querySelectorAll('.usernames'));
 const retakeBtn2El = document.querySelector('#retakeBtn2');
-// const leaderboardTableEl = document.querySelector('#leaderboard-body');
 
 // This is going to grab our highscores for our 'leaderboard' OR it will start an empty string if there aren't any.
 const leaderboard =  JSON.parse(localStorage.getItem('leaderboard')) || [];
