@@ -58,13 +58,13 @@ viewHighscoresEl.addEventListener('click', () => {
     gameOverEl.classList.add('hide');
     highscoreEl.classList.remove('hide');
 
-    usernamesEl.forEach(username => {
+    usernamesEl.forEach(() => {
         let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
         username.innerText = 
         usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User.toUpperCase();
     })
 
-    scoresEl.forEach(score => {
+    scoresEl.forEach(() => {
         let allScores = JSON.parse(localStorage.getItem('leaderboard'));
         score.innerText = allScores[highscoreIndex++].Score;
         })
