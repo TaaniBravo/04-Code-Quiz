@@ -220,8 +220,9 @@ function submitScore() {
 
         usernamesEl.forEach(username => {
             let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
+            allUsernames[usernameIndex++].User.toUpperCase() = usernamesCapitalized
             username.innerText = 
-            usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User.toUpperCase();
+            usernameIndex + 1 + '. ' + usernamesCapitalized;
         });
     
         scoresEl.forEach(score => {
