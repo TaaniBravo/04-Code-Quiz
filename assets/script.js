@@ -34,8 +34,6 @@ const retakeBtn2El = document.querySelector('#retakeBtn2');
 const leaderboard =  JSON.parse(localStorage.getItem('leaderboard')) || [];
 let usernameIndex = 0;
 let highscoreIndex = 0;
-// // We want our leaderboard to stop at TOP TEN scores.
-// const maxHighscores = 10
 
 // Timer/Score Variables
 let timeLeft = 75;
@@ -60,8 +58,9 @@ viewHighscoresEl.addEventListener('click', () => {
 
     usernamesEl.forEach(username => {
         let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
-        username.innerText = 
-        usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User.toUpperCase;
+            allUsernames[usernameIndex++].User.toUpperCase() = usernamesCapitalized
+            username.innerText = 
+            usernameIndex + 1 + '. ' + usernamesCapitalized;
     })
 
     scoresEl.forEach(score => {
