@@ -192,3 +192,17 @@ button {
     /* This will allow the javascript to dictate which of the sections are viewable at the moment. */
     display: none !important;
 }
+
+@media only screen and (max-width: 768px ) {
+    
+    body {
+        width: 100%;
+        height: 100%;
+    }
+    
+    main {
+        width: 100%;
+        padding: 10px;
+        height: 100%;
+    }
+}
