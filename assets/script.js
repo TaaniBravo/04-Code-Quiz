@@ -35,6 +35,9 @@ const leaderboard =  JSON.parse(localStorage.getItem('leaderboard')) || [];
 let usernameIndex = 0;
 let highscoreIndex = 0;
 
+// // We want our leaderboard to stop at TOP TEN scores.
+const maxHighscores = 10
+
 // Timer/Score Variables
 let timeLeft = 75;
 const timerDisplayEL = document.getElementById('timer');
@@ -58,7 +61,7 @@ viewHighscoresEl.addEventListener('click', () => {
 
     usernamesEl.forEach(username => {
         let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
-            allUsernames[usernameIndex++].User.toUpperCase() = usernamesCapitalized
+            usernamesCapitalized = allUsernames[usernameIndex++].User.toUpperCase()
             username.innerText = 
             usernameIndex + 1 + '. ' + usernamesCapitalized;
     })
@@ -215,7 +218,7 @@ function submitScore() {
 
         usernamesEl.forEach(username => {
             let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
-            allUsernames[usernameIndex++].User.toUpperCase() = usernamesCapitalized
+            usernamesCapitalized = allUsernames[usernameIndex++].User.toUpperCase()
             username.innerText = 
             usernameIndex + 1 + '. ' + usernamesCapitalized;
         });
