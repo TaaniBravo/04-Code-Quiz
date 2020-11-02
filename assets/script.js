@@ -36,6 +36,10 @@ let usernameIndex = 0;
 let highscoreIndex = 0;
 // We want our leaderboard to stop at TOP TEN scores.
 const maxHighscores = 10
+let userScore = {
+    User: userInputEl.value, 
+    // The Score is our score + 1 so that the score the user sees is consistent to the timeLeft on the timer.
+    Score: score + 1}
 
 // Timer/Score Variables
 let timeLeft = 75;
@@ -61,7 +65,7 @@ viewHighscoresEl.addEventListener('click', () => {
     usernamesEl.forEach(username => {
         let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
         username.innerText = 
-        usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User;
+        usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User.toUpperCase;
     })
 
     scoresEl.forEach(score => {
@@ -193,10 +197,10 @@ function submitScore() {
     else {
         let score = timeLeft
         // The user's initials and their score are stored in this object.
-        let userScore = {
-            User: userInputEl.value, 
-            // The Score is our score + 1 so that the score the user sees is consistent to the timeLeft on the timer.
-            Score: score + 1}
+        // let userScore = {
+        //     User: userInputEl.value, 
+        //     // The Score is our score + 1 so that the score the user sees is consistent to the timeLeft on the timer.
+        //     Score: score + 1}
 
         leaderboard.push(userScore)
 
@@ -217,7 +221,7 @@ function submitScore() {
         usernamesEl.forEach(username => {
             let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
             username.innerText = 
-            usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User;
+            usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User.toUpperCase();
         });
     
         scoresEl.forEach(score => {
