@@ -25,9 +25,9 @@ const retakeBtnEl = document.getElementById('retakeBtn');
 
 // Leaderboard Screen Variables
 const highscoreEl = document.querySelector('#highscores');
-const userInputEL = document.querySelector('#userInitials');
+const userInputEl = document.querySelector('#userInitials');
 const scoresEl = Array.from(document.querySelectorAll('.scores'));
-const usernamesEL = Array.from(document.querySelectorAll('.usernames'));
+const usernamesEl = Array.from(document.querySelectorAll('.usernames'));
 const retakeBtn2El = document.querySelector('#retakeBtn2');
 
 // This is going to grab our highscores for our 'leaderboard' OR it will start an empty string if there aren't any.
@@ -58,7 +58,7 @@ viewHighscoresEl.addEventListener('click', () => {
     gameOverEl.classList.add('hide');
     highscoreEl.classList.remove('hide');
 
-    usernamesEL.forEach(username => {
+    usernamesEl.forEach(username => {
         let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
         username.innerText = 
         usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User.toUpperCase();
@@ -187,14 +187,14 @@ function submitScore() {
 // WHEN the game is over then the user can save their name and score and it updates to the leaderboard.
     
     // IF the user INPUTS nothing for the username then they are RETURNED out of this function from storing.
-    if (userInputEL.value < 1) return;
+    if (userInputEl.value < 1) return;
 
     // ELSE the user is brought to the Leaderboard screen with their new updated score.
     else {
         let score = timeLeft
         // The user's initials and their score are stored in this object.
         let userScore = {
-            User: userInputEL.value, 
+            User: userInputEl.value, 
             // The Score is our score + 1 so that the score the user sees is consistent to the timeLeft on the timer.
             Score: score + 1}
 
@@ -214,10 +214,10 @@ function submitScore() {
         highscoreEl.classList.remove('hide')
         gameOverEl.classList.add('hide')
 
-        usernamesEL.forEach(username => {
+        usernamesEl.forEach(username => {
             let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
             username.innerText = 
-            usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User.toUpperCase();
+            usernameIndex + 1 + '. ' + allUsernames[usernameIndex++].User;
         });
     
         scoresEl.forEach(score => {
