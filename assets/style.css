@@ -172,13 +172,15 @@ button {
     padding: 0 25px;
 }
 
-.usernames, .scores {
+#usernames, #scores {
     display: flex;
     justify-content: center;
+    text-align: center;
     padding: 5px 0;
+    flex-flow: column wrap;
 }
 
-.scores {
+#scores {
     list-style-type: none;
 }
 

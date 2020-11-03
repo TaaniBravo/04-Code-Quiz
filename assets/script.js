@@ -26,16 +26,20 @@ const retakeBtnEl = document.getElementById('retakeBtn');
 // Leaderboard Screen Variables
 const highscoreEl = document.querySelector('#highscores');
 const userInputEl = document.querySelector('#userInitials');
-const scoresEl = Array.from(document.querySelectorAll('.scores'));
-const usernamesEl = Array.from(document.querySelectorAll('.usernames'));
+const scoresEl = document.querySelector('#scores');
+const usernamesEl = document.querySelector('#usernames');
 const retakeBtn2El = document.querySelector('#retakeBtn2');
+let localUsers = [];
+let usernameIndex = 0;
+let scoreIndex = 0;
+// const localScores = [];
 
 // This is going to grab our highscores for our 'leaderboard' OR it will start an empty string if there aren't any.
 const leaderboard =  JSON.parse(localStorage.getItem('leaderboard')) || [];
-let usernameIndex = 0;
-let highscoreIndex = 0;
+// The empty array we created earlier we now want to CONCATENATE it will our leaderboard array.
+localUsers = localUsers.concat(leaderboard)
 
-// // We want our leaderboard to stop at TOP TEN scores.
+// We want our leaderboard to stop at TOP TEN scores.
 const maxHighscores = 10
 
 // Timer/Score Variables
@@ -59,17 +63,20 @@ viewHighscoresEl.addEventListener('click', () => {
     gameOverEl.classList.add('hide');
     highscoreEl.classList.remove('hide');
 
-    usernamesEl.forEach(username => {
-        let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
-            usernamesCapitalized = allUsernames[usernameIndex++].User.toUpperCase()
-            username.innerText = 
-            usernameIndex + 1 + '. ' + usernamesCapitalized;
-    })
 
-    scoresEl.forEach(score => {
-        let allScores = JSON.parse(localStorage.getItem('leaderboard'));
-        score.innerText = allScores[highscoreIndex++].Score;
-        })
+    localUsers.forEach(() => {
+        
+        users = document.createElement('li');
+        users.innerText = localUsers[usernameIndex].userId;
+        usernamesEl.appendChild(users) 
+        usernameIndex++
+        
+        // const scores = finalLB[scoreIndex];
+        scores = document.createElement('li');
+        scores.innerText = localUsers[scoreIndex].Score;
+        scoresEl.appendChild(scores)
+        scoreIndex++
+    });
 });
 
 
@@ -196,7 +203,7 @@ function submitScore() {
         let score = timeLeft
         // The user's initials and their score are stored in this object.
         let userScore = {
-            User: userInputEl.value, 
+            userId: userInputEl.value.toUpperCase(), 
             // The Score is our score + 1 so that the score the user sees is consistent to the timeLeft on the timer.
             Score: score + 1}
 
@@ -216,17 +223,21 @@ function submitScore() {
         highscoreEl.classList.remove('hide')
         gameOverEl.classList.add('hide')
 
-        usernamesEl.forEach(username => {
-            let allUsernames = JSON.parse(localStorage.getItem('leaderboard'));
-            usernamesCapitalized = allUsernames[usernameIndex++].User.toUpperCase()
-            username.innerText = 
-            usernameIndex + 1 + '. ' + usernamesCapitalized;
+        // FOR EACH of the top ten users we are going to dynamically create list elements for them and place them into the HTML in a sort manner from highest to lowest.
+        localUsers.forEach(() => {
+        
+            users = document.createElement('li');
+            users.innerText = localUsers[usernameIndex].userId;
+            usernamesEl.appendChild(users) 
+            usernameIndex++
+            
+            // const scores = finalLB[scoreIndex];
+            scores = document.createElement('li');
+            scores.innerText = localUsers[scoreIndex].Score;
+            scoresEl.appendChild(scores)
+            scoreIndex++
         });
-    
-        scoresEl.forEach(score => {
-            let allScores = JSON.parse(localStorage.getItem('leaderboard'));
-            score.innerText = allScores[highscoreIndex++].Score;
-            });
+        
     }
 
 };
